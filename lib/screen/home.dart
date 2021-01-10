@@ -1,3 +1,4 @@
+import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:closet_map/shape_clipper/Shape4HomeTop.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       //backgroundColor: Colors.redAccent,
+      bottomNavigationBar: CustomAppBar(),
       body: Column(
         children: <Widget>[HomeTopScreen()],
       ),
