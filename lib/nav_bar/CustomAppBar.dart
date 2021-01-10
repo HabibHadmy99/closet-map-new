@@ -5,6 +5,7 @@ import 'package:closet_map/screen/shop.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget {
+  @override
   Widget build(BuildContext context) {
     return Material(
       elevation: 15.0,
@@ -33,12 +34,12 @@ class CustomAppBar extends StatelessWidget {
             ),
           ],
           selectedItemColor: Colors.deepOrangeAccent[400],
-          onTap: (index) {
-            if (index == 0) {
+          onTap: (_onItemTapped) {
+            if (_onItemTapped == 0) {
               Navigator.pushReplacement(context, Home.route());
-            } else if (index == 1) {
+            } else if (_onItemTapped == 1) {
               Navigator.pushReplacement(context, ShopScreen.route());
-            } else if (index == 2) {
+            } else if (_onItemTapped == 2) {
               Navigator.pushReplacement(context, CartScreen.route());
             } else {
               Navigator.pushReplacement(context, Account.route());
