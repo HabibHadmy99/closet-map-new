@@ -41,7 +41,7 @@ class CustomAppBar extends StatelessWidget {
             } else if (index == 2) {
               Navigator.pushReplacement(context, CartScreen.route());
             } else {
-              Navigator.pushReplacement(context, AccountScreen.route());
+              Navigator.pushReplacement(context, Account.route());
             }
           }),
     );
