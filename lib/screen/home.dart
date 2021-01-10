@@ -7,11 +7,13 @@ import 'login.dart';
 List<String> setupOption = ['User Setting', 'Logout'];
 
 class Home extends StatelessWidget {
+  static Route<dynamic> route() => MaterialPageRoute(builder: (_) => Home());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomAppBar(),
       body: Column(children: <Widget>[HomeTopScreen()]),
+      bottomNavigationBar: CustomAppBar(),
     );
   }
 }

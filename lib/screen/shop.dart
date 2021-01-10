@@ -1,9 +1,9 @@
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:flutter/material.dart';
 
-class AccountScreen extends StatelessWidget {
+class ShopScreen extends StatelessWidget {
   static Route<dynamic> route() =>
-      MaterialPageRoute(builder: (_) => AccountScreen());
+      MaterialPageRoute(builder: (_) => ShopScreen());
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class AccountScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                "Untuk Account Screen",
+                "Untuk Shop Screen",
                 style: TextStyle(
                     fontSize: 32.0,
                     color: Colors.white,
