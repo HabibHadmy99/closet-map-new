@@ -1,21 +1,16 @@
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:closet_map/shape_clipper/Shape4HomeTop.dart';
 import 'package:flutter/material.dart';
+import 'account.dart';
 
-class Home extends StatefulWidget {
-  @override
-  _HomeState createState() => _HomeState();
-}
+List<String> setupOption = ['User Setting', 'Logout'];
 
-class _HomeState extends State<Home> {
+class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Colors.redAccent,
       bottomNavigationBar: CustomAppBar(),
-      body: Column(
-        children: <Widget>[HomeTopScreen()],
-      ),
+      body: Column(children: <Widget>[HomeTopScreen()]),
     );
   }
 }
@@ -49,7 +44,40 @@ class _HomeTopScreenState extends State<HomeTopScreen> {
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                       Spacer(),
-                      Icon(Icons.settings, color: Colors.white, size: 30),
+                      PopupMenuButton(
+                        child: Row(
+                          children: <Widget>[
+                            Icon(Icons.settings, color: Colors.white, size: 30),
+                          ],
+                        ),
+                        itemBuilder: (BuildContext context) =>
+                            <PopupMenuItem<int>>[
+                          PopupMenuItem(
+                            child: Row(
+                              children: <Widget>[
+                                Icon(Icons.switch_account),
+                                Text(setupOption[0]),
+                              ],
+                            ),
+                            value: 0,
+                          ),
+                          PopupMenuItem(
+                            child: Row(
+                              children: <Widget>[
+                                Icon(Icons.logout),
+                                Text(setupOption[1]),
+                              ],
+                            ),
+                            value: 1,
+                          ),
+                        ],
+                        onSelected: (value) {
+                          if (value == 0) {
+                            Navigator.pushReplacement(
+                                context, AccountScreen.route());
+                          } else {} //Logout
+                        },
+                      ),
                     ],
                   ),
                 ),
