@@ -2,6 +2,7 @@ import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:closet_map/shape_clipper/Shape4HomeTop.dart';
 import 'package:flutter/material.dart';
 import 'account.dart';
+import 'login.dart';
 
 List<String> setupOption = ['User Setting', 'Logout'];
 
@@ -75,7 +76,10 @@ class _HomeTopScreenState extends State<HomeTopScreen> {
                           if (value == 0) {
                             Navigator.pushReplacement(
                                 context, AccountScreen.route());
-                          } else {} //Logout
+                          } else {
+                            Navigator.pushReplacement(
+                                context, LoginScreen.route());
+                          } //Logout
                         },
                       ),
                     ],

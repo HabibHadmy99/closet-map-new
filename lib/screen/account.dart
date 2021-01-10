@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'home.dart';
-
 class AccountScreen extends StatelessWidget {
   static Route<dynamic> route() =>
       MaterialPageRoute(builder: (_) => AccountScreen());
@@ -9,8 +7,20 @@ class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text(
-        'Kat Sini User Setting',
+      backgroundColor: Colors.orangeAccent,
+      body: Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                "Untuk Account User Screen",
+                style: TextStyle(
+                    fontSize: 32.0,
+                    color: Colors.white,
+                    fontFamily: 'Oxygen',
+                    fontWeight: FontWeight.bold),
+              ),
+            ]),
       ),
     );
   }
