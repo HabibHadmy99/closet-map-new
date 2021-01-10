@@ -2,6 +2,8 @@ import 'package:closet_map/List/list.dart';
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:flutter/material.dart';
 
+import 'item_detail.dart';
+
 class ShopScreen extends StatelessWidget {
   static Route<dynamic> route() =>
       MaterialPageRoute(builder: (_) => ShopScreen());
@@ -115,7 +117,7 @@ class ShopScreen extends StatelessWidget {
     return Hero(
       tag: brand,
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {Navigator.pushReplacement(context, ItemDetailScreen.route());},
         child: Container(
           height: 250,
           width: double.infinity,
