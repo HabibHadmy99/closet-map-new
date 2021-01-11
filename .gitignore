@@ -44,3 +44,16 @@ app.*.map.json
 .flutter-plugins-dependencies
 .packages
 android/local.properties
+.dart_tool/package_config.json
+.flutter-plugins
+.flutter-plugins-dependencies
+android/.gradle/5.6.2/executionHistory/executionHistory.lock
+android/.gradle/5.6.2/fileHashes/fileHashes.bin
+android/.gradle/5.6.2/fileHashes/fileHashes.lock
+android/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+build/app/generated/not_namespaced_r_class_sources/debug/r/androidx/activity/R.java
+*.java
+*.json
+*.gson
+*.xml
+*.dex
