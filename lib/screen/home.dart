@@ -12,18 +12,25 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(children: <Widget>[HomeTopScreen()]),
+      body: Column(children: <Widget>[HomeTopScreen(username: 'Habib Hadmy',headerWords: 'Let\'s Start \nShopping !!',)]),
       bottomNavigationBar: CustomAppBar(),
     );
   }
 }
 
 class HomeTopScreen extends StatefulWidget {
+  final headerWords;
+  final username;
+
+  HomeTopScreen({this.username,this.headerWords});
   @override
   _HomeTopScreenState createState() => _HomeTopScreenState();
 }
 
 class _HomeTopScreenState extends State<HomeTopScreen> {
+
+
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -43,7 +50,7 @@ class _HomeTopScreenState extends State<HomeTopScreen> {
                       Icon(Icons.account_circle_rounded,
                           color: Colors.white, size: 40),
                       Text(
-                        "Habib Hadmy",
+                        widget.username,
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                       Spacer(),
@@ -90,7 +97,7 @@ class _HomeTopScreenState extends State<HomeTopScreen> {
                   height: 10.0,
                 ),
                 Text(
-                  'Lets Start\nShopping !!',
+                  widget.headerWords,
                   style: TextStyle(
                       fontSize: 35.0,
                       color: Colors.white,

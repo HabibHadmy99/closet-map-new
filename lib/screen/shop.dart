@@ -91,29 +91,33 @@ class ShopScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              makeItem(
-                  names: shirts[0]['name'],
-                  image: shirts[0]['image'],
-                  brand: shirts[0]['brand'],
-                  context: context),
-              makeItem(
-                  names: shirts[1]['name'],
-                  image: shirts[1]['image'],
-                  brand: shirts[1]['brand'],
-                  context: context),
-              makeItem(
-                  names: shirts[2]['name'],
-                  image: shirts[2]['image'],
-                  brand: shirts[2]['brand'],
-                  context: context),
+              MakeItem(names: shirts[0]['name'], image: shirts[0]['image'], brand: shirts[0]['brand'], context: context),
+              MakeItem(names: shirts[1]['name'], image: shirts[1]['image'], brand: shirts[1]['brand'], context: context),
+              MakeItem(names: shirts[2]['name'], image: shirts[2]['image'], brand: shirts[2]['brand'], context: context),
             ],
           ),
         ),
       ),
     );
   }
+}
 
-  Widget makeItem({names, image, brand, context}) {
+class MakeItem extends StatelessWidget {
+  const MakeItem({
+    Key key,
+    @required this.names,
+    @required this.image,
+    @required this.brand,
+    @required this.context,
+  }) : super(key: key);
+
+  final names;
+  final image;
+  final brand;
+  final context;
+
+  @override
+  Widget build(BuildContext context) {
     return Hero(
       tag: brand,
       child: GestureDetector(
