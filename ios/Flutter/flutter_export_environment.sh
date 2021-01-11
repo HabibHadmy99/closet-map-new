@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
 export "FLUTTER_ROOT=C:\src\flutter"
-export "FLUTTER_APPLICATION_PATH=G:\UTM SEM 5\MAP\Project\closet-map-new"
+export "FLUTTER_APPLICATION_PATH=C:\Users\User\OneDrive\Desktop\SEM 5\MAP\PROJECT\ClosetShop\closet-map-new"
 export "FLUTTER_TARGET=lib\main.dart"
 export "FLUTTER_BUILD_DIR=build"
 export "SYMROOT=${SOURCE_ROOT}/../build\ios"

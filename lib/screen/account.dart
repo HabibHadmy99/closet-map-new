@@ -2,6 +2,7 @@ import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:closet_map/screen/home.dart';
 import 'package:closet_map/screen/my_order.dart';
+import 'package:closet_map/screen/profile.dart';
 import 'package:closet_map/shape_clipper/profile_clipper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -69,7 +70,7 @@ class _ProfileState extends State<Account> {
                 item: "My Profile",
                 icon: 'assets/icons/heart.svg',
                 press: () {
-                  Navigator.pushReplacement(context, Home.route());
+                  Navigator.pushReplacement(context, MyProfile.route());
                 }),
             ProfileItem(
                 item: "My Order",
