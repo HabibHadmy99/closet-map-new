@@ -1,4 +1,3 @@
-import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -49,9 +48,9 @@ class _UserState extends State<MyProfile> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        CircularProfileAvatar(
-                          "https://i.pravatar.cc/300",
-                          borderWidth: 4.0,
+                        CircleAvatar(
+                          backgroundImage:
+                              AssetImage("assets/images/profile.png"),
                           radius: 60.0,
                         ),
                         SizedBox(height: 4.0),

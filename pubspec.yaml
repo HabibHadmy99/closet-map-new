@@ -23,9 +23,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  circular_profile_avatar: ^1.0.6
+  #circular_profile_avatar: ^1.0.6
   cupertino_icons: ^1.0.0
-  flutter_svg: ^0.18.0
+  #flutter_svg: ^0.18.0
   flutter_typeahead: ^1.9.3
 
 dev_dependencies:
