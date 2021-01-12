@@ -28,3 +28,11 @@ List<Map> icon = [
     'image': 'assets/images/61848.png'
   },
 ];
+
+List<String> color = [
+  'Black', 'White', 'Green', 'Orange'
+];
+
+List<String> size = [
+  'XS', 'S', 'M', 'L'
+];
