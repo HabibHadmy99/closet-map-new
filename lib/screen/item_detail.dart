@@ -2,6 +2,8 @@ import 'package:closet_map/List/list.dart';
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:flutter/material.dart';
 
+import 'cart.dart';
+
 class ItemDetailScreen extends StatefulWidget {
   @override
   _ItemDetailScreen createState() => _ItemDetailScreen();
@@ -111,7 +113,7 @@ class _ItemDetailScreen extends State<ItemDetailScreen> {
                           color: Colors.deepOrange,
                           shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(30.0)),
-                          onPressed: () {},
+                          onPressed: () {Navigator.pushReplacement(context, CartScreen.route());},
                         ),
                       ),
                       ShippingInfo()
