@@ -1,7 +1,6 @@
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:closet_map/screen/home.dart';
 import 'package:closet_map/screen/my_order.dart';
-import 'package:closet_map/screen/profile.dart';
 import 'package:closet_map/shape_clipper/profile_clipper.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +38,7 @@ class _ProfileState extends State<Account> {
                       children: <Widget>[
                         CircleAvatar(
                           backgroundImage:
-                              NetworkImage("https://i.pravatar.cc/300"),
+                              AssetImage("assets/images/profile.png"),
                           radius: 60.0,
                         ),
                         SizedBox(height: 4.0),
@@ -66,16 +65,19 @@ class _ProfileState extends State<Account> {
             ),
             ProfileItem(
                 item: "My Profile",
+                icon: 'assets/images/arrow.png',
                 press: () {
-                  Navigator.pushReplacement(context, MyProfile.route());
+                  Navigator.pushReplacement(context, Home.route());
                 }),
             ProfileItem(
                 item: "My Order",
+                icon: 'assets/images/arrow.png',
                 press: () {
                   Navigator.pushReplacement(context, Order.route());
                 }),
             ProfileItem(
                 item: "Setting",
+                icon: 'assets/images/arrow.png',
                 press: () {
                   Navigator.pushReplacement(context, Home.route());
                 }),
@@ -90,12 +92,14 @@ class ProfileItem extends StatelessWidget {
   const ProfileItem({
     Key key,
     @required this.item,
+    @required this.icon,
     this.press,
   }) : super(key: key);
 
-  final String item;
+  final String item, icon;
   final VoidCallback press;
 
+  //final String icon;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -107,6 +111,7 @@ class ProfileItem extends StatelessWidget {
         onPressed: press,
         child: Row(
           children: [
+            // to load all the icons
             SizedBox(width: 20),
             Expanded(
                 child: Text(
@@ -120,3 +125,4 @@ class ProfileItem extends StatelessWidget {
     );
   }
 }
+
