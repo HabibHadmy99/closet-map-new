@@ -26,79 +26,71 @@ class ShopScreen extends StatelessWidget {
                 height: 40,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    AspectRatio(
-                        aspectRatio: 2.2 / 1,
-                        child: Container(
-                          margin: EdgeInsets.only(right: 10),
-                          decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Center(
-                            child: Text(
-                              "All",
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ),
-                        )),
-                    AspectRatio(
-                        aspectRatio: 2.2 / 1,
-                        child: Container(
-                          margin: EdgeInsets.only(right: 10),
-                          child: Center(
-                            child: Text(
-                              "Mens",
-                              style: TextStyle(fontSize: 17),
-                            ),
-                          ),
-                        )),
-                    AspectRatio(
-                        aspectRatio: 2.2 / 1,
-                        child: Container(
-                          margin: EdgeInsets.only(right: 10),
-                          child: Center(
-                            child: Text(
-                              "Womens",
-                              style: TextStyle(fontSize: 17),
-                            ),
-                          ),
-                        )),
-                    AspectRatio(
-                        aspectRatio: 2.2 / 1,
-                        child: Container(
-                          margin: EdgeInsets.only(right: 10),
-                          child: Center(
-                            child: Text(
-                              "Kids",
-                              style: TextStyle(fontSize: 17),
-                            ),
-                          ),
-                        )),
-                    AspectRatio(
-                        aspectRatio: 2.2 / 1,
-                        child: Container(
-                          margin: EdgeInsets.only(right: 10),
-                          child: Center(
-                            child: Text(
-                              "Shoes",
-                              style: TextStyle(fontSize: 17),
-                            ),
-                          ),
-                        )),
+                  children: [
+                    Categories(category: 'All',),
+                    Categories(category: 'Mens',),
+                    Categories(category: 'Womens',),
+                    Categories(category: 'Kids',),
+                    Categories(category: 'Shoes',),
                   ],
+                  /* 
+                  itemCount: shirts.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      child: MakeItem(
+                        brand: shirts[index]['brand'],
+                        image: shirts[index]['image'],
+                        context: context,
+                        names: shirts[index]['name'],
+                        ),
+                    );
+                  }
+                  */
                 ),
               ),
               SizedBox(
                 height: 20,
               ),
-              MakeItem(names: shirts[0]['name'], image: shirts[0]['image'], brand: shirts[0]['brand'], context: context),
-              MakeItem(names: shirts[1]['name'], image: shirts[1]['image'], brand: shirts[1]['brand'], context: context),
-              MakeItem(names: shirts[2]['name'], image: shirts[2]['image'], brand: shirts[2]['brand'], context: context),
+              
+              MakeItem(
+                  names: shirts[0]['name'],
+                  image: shirts[0]['image'],
+                  brand: shirts[0]['brand'],
+                  context: context),
+              MakeItem(
+                  names: shirts[1]['name'],
+                  image: shirts[1]['image'],
+                  brand: shirts[1]['brand'],
+                  context: context),
+              MakeItem(
+                  names: shirts[2]['name'],
+                  image: shirts[2]['image'],
+                  brand: shirts[2]['brand'],
+                  context: context),
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class Categories extends StatelessWidget {
+  Categories({this.category});
+  final category;
+  @override
+  Widget build(BuildContext context) {
+    return AspectRatio(
+        aspectRatio: 2.2 / 1,
+        child: Container(
+          margin: EdgeInsets.only(right: 10),
+          child: Center(
+            child: Text(
+              category,
+              style: TextStyle(fontSize: 17),
+            ),
+          ),
+        ));
   }
 }
 
@@ -121,7 +113,9 @@ class MakeItem extends StatelessWidget {
     return Hero(
       tag: brand,
       child: GestureDetector(
-        onTap: () {Navigator.pushReplacement(context, ItemDetailScreen.route());},
+        onTap: () {
+          Navigator.pushReplacement(context, ItemDetailScreen.route());
+        },
         child: Container(
           height: 250,
           width: double.infinity,
