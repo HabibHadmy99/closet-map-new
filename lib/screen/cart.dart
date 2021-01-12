@@ -37,7 +37,10 @@ class CartScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  SizedBox(height: 20),
+                  SizedBox(
+                    height: 50,
+                    width: 50,
+                  ),
                   Container(
                     child: Row(children: [
                       Container(
@@ -51,7 +54,7 @@ class CartScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
-                      /*Column(children: [
+                      Column(children: [
                         Container(
                           height: 50,
                           padding: EdgeInsets.only(left: 10),
@@ -86,19 +89,19 @@ class CartScreen extends StatelessWidget {
                           ),
                         ),
                       ]),
-                      Container(
-                        padding: EdgeInsets.all(30),
-                        width: 35,
-                        height: 35,
-                        decoration: BoxDecoration(
-                          color: Colors.red[500],
-                          image: new DecorationImage(
-                              image: new AssetImage("assets/images/61848.png")),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                      ),*/
                     ]),
                   ),
+                  /* Container(
+                    padding: EdgeInsets.only(right: 30),
+                    width: 35,
+                    height: 35,
+                    decoration: BoxDecoration(
+                      color: Colors.red[400],
+                      image: new DecorationImage(
+                          image: new AssetImage("assets/images/61848.png")),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),*/
                 ],
               ),
             );
