@@ -1,11 +1,9 @@
-import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:closet_map/screen/home.dart';
 import 'package:closet_map/screen/my_order.dart';
 import 'package:closet_map/screen/profile.dart';
 import 'package:closet_map/shape_clipper/profile_clipper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class Account extends StatefulWidget {
   static Route<dynamic> route() => MaterialPageRoute(builder: (_) => Account());
@@ -39,9 +37,9 @@ class _ProfileState extends State<Account> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        CircularProfileAvatar(
-                          "https://i.pravatar.cc/300",
-                          borderWidth: 4.0,
+                        CircleAvatar(
+                          backgroundImage:
+                              AssetImage("assets/images/profile.png"),
                           radius: 60.0,
                         ),
                         SizedBox(height: 4.0),
@@ -68,19 +66,16 @@ class _ProfileState extends State<Account> {
             ),
             ProfileItem(
                 item: "My Profile",
-                icon: 'assets/icons/heart.svg',
                 press: () {
                   Navigator.pushReplacement(context, MyProfile.route());
                 }),
             ProfileItem(
                 item: "My Order",
-                icon: 'assets/icons/heart.svg',
                 press: () {
                   Navigator.pushReplacement(context, Order.route());
                 }),
             ProfileItem(
                 item: "Setting",
-                icon: 'assets/icons/heart.svg',
                 press: () {
                   Navigator.pushReplacement(context, Home.route());
                 }),
@@ -95,11 +90,10 @@ class ProfileItem extends StatelessWidget {
   const ProfileItem({
     Key key,
     @required this.item,
-    @required this.icon,
     this.press,
   }) : super(key: key);
 
-  final String item, icon;
+  final String item;
   final VoidCallback press;
 
   //final String icon;
@@ -114,12 +108,6 @@ class ProfileItem extends StatelessWidget {
         onPressed: press,
         child: Row(
           children: [
-            SvgPicture.asset(
-              icon,
-              color: Colors.blueGrey,
-              width: 22,
-            ),
-            // to load all the icons
             SizedBox(width: 20),
             Expanded(
                 child: Text(
