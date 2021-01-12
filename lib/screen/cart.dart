@@ -44,7 +44,7 @@ class CartScreen extends StatelessWidget {
                   Container(
                     child: Row(children: [
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        padding: EdgeInsets.symmetric(horizontal: 15),
                         width: 150,
                         height: 150,
                         decoration: BoxDecoration(
@@ -56,8 +56,8 @@ class CartScreen extends StatelessWidget {
                       ),
                       Column(children: [
                         Container(
-                          height: 50,
-                          padding: EdgeInsets.only(left: 10),
+                          height: 30,
+                          padding: EdgeInsets.only(right: 5),
                           child: Text(
                             buyshirts[index]['name'],
                             style: TextStyle(
@@ -67,24 +67,24 @@ class CartScreen extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          height: 50,
-                          padding: EdgeInsets.only(left: 10),
+                          height: 25,
+                          padding: EdgeInsets.only(left: 5),
                           child: Text(
-                            buyshirts[index]['brand'],
+                            "Brand: " + buyshirts[index]['brand'],
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 20,
+                              fontSize: 15,
                             ),
                           ),
                         ),
                         Container(
                           //height: 120,
-                          padding: EdgeInsets.only(left: 10),
+                          //padding: EdgeInsets.only(left: 10),
                           child: Text(
-                            buyshirts[index]['price'],
+                            "Price: " + buyshirts[index]['price'],
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 20,
+                              fontSize: 15,
                             ),
                           ),
                         ),
