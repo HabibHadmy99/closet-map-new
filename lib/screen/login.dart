@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'home.dart';
 import 'signup.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -64,7 +65,9 @@ class LoginScreen extends StatelessWidget {
                     minWidth: MediaQuery.of(context).size.width,
                     height: 55,
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushReplacement(context, Home.route());
+                      },
                       child: Text(
                         'Log in',
                         style: TextStyle(color: Colors.grey[800], fontSize: 22),
