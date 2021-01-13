@@ -16,10 +16,44 @@ class AdminHomeScreen extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: CustomAppBar(),
       body: Column(
-        children: <Widget>[HomeTopScreen(username: 'AdminUser',headerWords: 'Welcome, Admin',),
-
+        children: <Widget>[
+          HomeTopScreen(username: 'AdminUser',headerWords: 'Welcome, Admin',),
+          Container(
+            padding: EdgeInsets.only(left: 20),
+            alignment: Alignment.centerLeft,
+            child: Text('Your item list:',style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold),
+              ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: shirts.length,
+              itemBuilder: (context, index){
+                return ListTile(
+                  contentPadding: EdgeInsets.only(left: 0),
+                  title: Text(shirts[index]['name']),
+                  leading: Container(
+                      width: 100,
+                      height:80,
+                      child: Image(
+                        image: AssetImage(shirts[index]['image'],),
+                        fit: BoxFit.cover), 
+                      ),
+                  
+                  trailing: Icon(Icons.keyboard_arrow_right),
+                  onTap: (){},
+                  );
+              } ,
+              ),
+          )
           ],
         ),
+       floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        backgroundColor: Colors.pinkAccent,
+        onPressed: () {},
+      ),
     );
   }
 }

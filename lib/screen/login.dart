@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'home.dart';
-import 'signup.dart';
+//import 'signup.dart';
 
 class LoginScreen extends StatelessWidget {
   static Route<dynamic> route() =>
