@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-
-import 'home.dart';
+import 'login.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -17,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
             context,
             MaterialPageRoute(
                 builder: (context) => MaterialApp(
-                      home: Home(),
+                      home: LoginScreen(),
                       debugShowCheckedModeBanner: false,
                     ))));
   }
