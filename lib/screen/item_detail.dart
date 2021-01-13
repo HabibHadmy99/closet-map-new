@@ -43,28 +43,19 @@ class _ItemDetailScreen extends State<ItemDetailScreen> {
                           //dropdowns
                           child: Row(
                         children: <Widget>[
-                          Container(
-                            //dropdown1
-                            margin: EdgeInsets.only(right: 0, left: 20),
-                            height: 50,
-                            width: 70,
-                            child: VariationDropDown(
+                          //dropdown1
+                            VariationDropDown(
                               variation: color,
                               dropdownValue: color[0],
                               state: this,
                             ),
-                          ),
-                          Container(
-                            //dropdown2
-                            margin: EdgeInsets.only(right: 0, left: 20),
-                            height: 50,
-                            width: 70,
-                            child: VariationDropDown(
+                          //dropdown2
+                            VariationDropDown(
                               variation: size,
                               dropdownValue: size[0],
                               state: this,
                             ),
-                          )
+                          
                         ],
                       )),
                       Container(
@@ -141,23 +132,28 @@ class VariationDropDown extends StatefulWidget {
 class _VariationDropDown extends State<VariationDropDown> {
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<String>(
-      value: widget.dropdownValue,
-      icon: Icon(Icons.arrow_drop_down),
-      iconSize: 24,
-      elevation: 20,
-      style: TextStyle(color: Colors.black38),
-      onChanged: (String newValue) {
-        setState(() {
-          widget.dropdownValue = newValue;
-        });
-      },
-      items: widget.variation.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
+    return Container(
+      margin: EdgeInsets.only(right: 0, left: 20),
+      height: 50,
+      width: 70,      
+      child: DropdownButton<String>(
+        value: widget.dropdownValue,
+        icon: Icon(Icons.arrow_drop_down),
+        iconSize: 24,
+        elevation: 20,
+        style: TextStyle(color: Colors.black38),
+        onChanged: (String newValue) {
+          setState(() {
+            widget.dropdownValue = newValue;
+          });
+        },
+        items: widget.variation.map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+      ),
     );
   }
 }
