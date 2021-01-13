@@ -33,40 +33,33 @@ class ShopScreen extends StatelessWidget {
                     Categories(category: 'Kids',),
                     Categories(category: 'Shoes',),
                   ],
-                  /* 
-                  itemCount: shirts.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      child: MakeItem(
-                        brand: shirts[index]['brand'],
-                        image: shirts[index]['image'],
-                        context: context,
-                        names: shirts[index]['name'],
-                        ),
-                    );
-                  }
-                  */
+
                 ),
               ),
               SizedBox(
                 height: 20,
               ),
+           SizedBox(
+             height: 600.0,
               
-              MakeItem(
-                  names: shirts[0]['name'],
-                  image: shirts[0]['image'],
-                  brand: shirts[0]['brand'],
-                  context: context),
-              MakeItem(
-                  names: shirts[1]['name'],
-                  image: shirts[1]['image'],
-                  brand: shirts[1]['brand'],
-                  context: context),
-              MakeItem(
-                  names: shirts[2]['name'],
-                  image: shirts[2]['image'],
-                  brand: shirts[2]['brand'],
-                  context: context),
+          child: ListView.builder(
+          
+          scrollDirection: Axis.vertical,
+          itemCount: shirts.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        child: MakeItem(
+                          brand: shirts[index]['brand'],
+                          image: shirts[index]['image'],
+                          context: context,
+                          names: shirts[index]['name'],
+                          ),
+                      );
+                    }
+          
+        )
+      
+            ) 
             ],
           ),
         ),

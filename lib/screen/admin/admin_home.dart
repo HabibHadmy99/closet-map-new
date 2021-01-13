@@ -1,8 +1,10 @@
 
+import 'package:closet_map/List/list.dart';
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../home.dart';
+import '../shop.dart';
 
 
 class AdminHomeScreen extends StatelessWidget {
@@ -15,15 +17,7 @@ class AdminHomeScreen extends StatelessWidget {
       bottomNavigationBar: CustomAppBar(),
       body: Column(
         children: <Widget>[HomeTopScreen(username: 'AdminUser',headerWords: 'Welcome, Admin',),
-      /*  ListView(
-          
-          scrollDirection: Axis.vertical,
-          children: <Widget>[
-            Container(
-              
-            )
-          ]
-        )*/
+
           ],
         ),
     );
