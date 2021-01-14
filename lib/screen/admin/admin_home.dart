@@ -32,12 +32,15 @@ class AdminHomeScreen extends StatelessWidget {
               itemBuilder: (context, index){
                 return ListTile(
                   contentPadding: EdgeInsets.only(left: 0),
-                  title: Text(shirts[index]['name']),
+                  title: Text(
+                    itemlist[index].name,
+                    style: TextStyle(letterSpacing: 1),
+                  ),
                   leading: Container(
                       width: 100,
                       height:80,
                       child: Image(
-                        image: AssetImage(shirts[index]['image'],),
+                        image: AssetImage(itemlist[index].image,),
                         fit: BoxFit.cover), 
                       ),
                   

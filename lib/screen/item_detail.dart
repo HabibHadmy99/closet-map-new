@@ -1,14 +1,17 @@
 import 'package:closet_map/List/list.dart';
+import 'package:closet_map/Models/item_model.dart';
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:flutter/material.dart';
 
 import 'cart.dart';
 
+//pass index
 class ItemDetailScreen extends StatefulWidget {
+  final Items itemsList;
   @override
+  ItemDetailScreen({this.itemsList});
   _ItemDetailScreen createState() => _ItemDetailScreen();
-  static Route<dynamic> route() =>
-      MaterialPageRoute(builder: (_) => ItemDetailScreen());
+  
 }
 
 class _ItemDetailScreen extends State<ItemDetailScreen> {
@@ -27,6 +30,7 @@ class _ItemDetailScreen extends State<ItemDetailScreen> {
           child: Column(
             children: <Widget>[
               Container(
+                
                   height: 1000,
                   child: Column(
                     children: <Widget>[
@@ -36,7 +40,7 @@ class _ItemDetailScreen extends State<ItemDetailScreen> {
                         width: 500,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage(shirts[0]['image']),
+                                image: AssetImage(widget.itemsList.image),
                                 fit: BoxFit.cover)),
                       ),
                       Container(
@@ -44,50 +48,63 @@ class _ItemDetailScreen extends State<ItemDetailScreen> {
                           child: Row(
                         children: <Widget>[
                           //dropdown1
-                            VariationDropDown(
-                              variation: color,
-                              dropdownValue: color[0],
-                              state: this,
-                            ),
+                          VariationDropDown(
+                            variation: color,
+                            dropdownValue: color[0],
+                            state: this,
+                          ),
                           //dropdown2
-                            VariationDropDown(
-                              variation: size,
-                              dropdownValue: size[0],
-                              state: this,
-                            ),
-                          
+                          VariationDropDown(
+                            variation: size,
+                            dropdownValue: size[0],
+                            state: this,
+                          ),
                         ],
                       )),
                       Container(
-                          //title & price
-                          padding: EdgeInsets.all(10),
+                          //title,brand & price
+                          padding: EdgeInsets.only(left: 10,bottom: 0,right: 10),
                           height: 50,
                           child: Row(
                             children: [
-                              Container(
-                                alignment: Alignment.centerLeft,
-                                child: Text(shirts[0]['name'],
-                                    style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.bold)),
-                              ),
-                              Container(
-                                  margin: EdgeInsets.only(left: 220),
-                                  alignment: Alignment.centerRight,
-                                  child: Text("100\$",
+                             Expanded(
+                                child: Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(widget.itemsList.name,
                                       style: TextStyle(
                                           fontSize: 25,
-                                          fontWeight: FontWeight.bold)))
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                              ),
+                             Container(
+                                    margin: EdgeInsets.only(left: 100),
+                                    alignment: Alignment.centerRight,
+                                    child: Text(
+                                        widget.itemsList.price.toString() + "\$",
+                                        style: TextStyle(
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.bold))),
+                              
                             ],
                           )),
                       Container(
+                        margin: EdgeInsets.only(left: 10,bottom: 15),
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                              widget.itemsList.brand,
+                              style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black54))),                      
+                      Container(
                         //description
+                        alignment: Alignment.centerLeft,
                         padding: EdgeInsets.only(
                           left: 10,
                           right: 30,
+                          bottom: 60
                         ),
-                        child: Text(
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam viverra nulla a erat tempus auctor. Ut a luctus odio. Aenean elementum, justo vel scelerisque venenatis, mi libero interdum dui, vel ultricies eros diam sed velit.',
+                        child: Text(widget.itemsList.desc,
                             style: TextStyle(
                               fontSize: 15,
                               color: Colors.grey,
@@ -95,7 +112,8 @@ class _ItemDetailScreen extends State<ItemDetailScreen> {
                       ),
                       Container(
                         //add to cart
-                        padding: EdgeInsets.only(left: 50, right: 50, top: 10,bottom: 10),
+                        padding: EdgeInsets.only(
+                            left: 50, right: 50, top: 10, bottom: 10),
                         child: FlatButton(
                           child: Text(
                             'Add to Cart',
@@ -104,7 +122,10 @@ class _ItemDetailScreen extends State<ItemDetailScreen> {
                           color: Colors.deepOrange,
                           shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(30.0)),
-                          onPressed: () {Navigator.pushReplacement(context, CartScreen.route());},
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                                context, CartScreen.route());
+                          },
                         ),
                       ),
                       ShippingInfo()
@@ -135,7 +156,7 @@ class _VariationDropDown extends State<VariationDropDown> {
     return Container(
       margin: EdgeInsets.only(right: 0, left: 20),
       height: 50,
-      width: 70,      
+      width: 70,
       child: DropdownButton<String>(
         value: widget.dropdownValue,
         icon: Icon(Icons.arrow_drop_down),
@@ -164,27 +185,26 @@ class ShippingInfo extends StatefulWidget {
 }
 
 class _ShippingInfo extends State<ShippingInfo> {
-
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
-      title: Text("Shipping Information", style: TextStyle(fontSize: 20),),
+      title: Text(
+        "Shipping Information",
+        style: TextStyle(fontSize: 20),
+      ),
       trailing: Icon(Icons.arrow_drop_down),
       backgroundColor: Colors.white,
       children: [
         Column(
-  
           children: [
             Container(
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(bottom: 15,left: 20),
+              padding: EdgeInsets.only(bottom: 15, left: 20),
               child: Text(
                 "Description of shipping information",
                 style: TextStyle(backgroundColor: Colors.white),
-                
               ),
             ),
-           
           ],
         )
       ],

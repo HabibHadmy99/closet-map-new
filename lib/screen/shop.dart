@@ -27,39 +27,44 @@ class ShopScreen extends StatelessWidget {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
-                    Categories(category: 'All',),
-                    Categories(category: 'Mens',),
-                    Categories(category: 'Womens',),
-                    Categories(category: 'Kids',),
-                    Categories(category: 'Shoes',),
+                    Categories(
+                      category: 'All',
+                    ),
+                    Categories(
+                      category: 'Mens',
+                    ),
+                    Categories(
+                      category: 'Womens',
+                    ),
+                    Categories(
+                      category: 'Kids',
+                    ),
+                    Categories(
+                      category: 'Shoes',
+                    ),
                   ],
-
                 ),
               ),
               SizedBox(
                 height: 20,
               ),
-           SizedBox(
-             height: 600.0,
-              
-          child: ListView.builder(
-          
-          scrollDirection: Axis.vertical,
-          itemCount: shirts.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        child: MakeItem(
-                          brand: shirts[index]['brand'],
-                          image: shirts[index]['image'],
-                          context: context,
-                          names: shirts[index]['name'],
+              Container(
+                  height:550.0,
+                  child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: shirts.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          child: MakeItem(
+                            brand: itemlist[index].brand,
+                            image: itemlist[index].image,
+                            context: context,
+                            names: itemlist[index].name,
+                            price: itemlist[index].price,
+                            index: index,
                           ),
-                      );
-                    }
-          
-        )
-      
-            ) 
+                        );
+                      }))
             ],
           ),
         ),
@@ -94,20 +99,28 @@ class MakeItem extends StatelessWidget {
     @required this.image,
     @required this.brand,
     @required this.context,
+    @required this.price,
+    this.index
   }) : super(key: key);
 
   final names;
   final image;
   final brand;
   final context;
-
+  final price;
+  final index;
   @override
   Widget build(BuildContext context) {
     return Hero(
       tag: brand,
       child: GestureDetector(
         onTap: () {
-          Navigator.pushReplacement(context, ItemDetailScreen.route());
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ItemDetailScreen(itemsList: itemlist[index]),
+            ),
+          );
         },
         child: Container(
           height: 250,
@@ -167,7 +180,7 @@ class MakeItem extends StatelessWidget {
                 ],
               ),
               Text(
-                "100\$",
+                price.toString() + "\$",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 30,
