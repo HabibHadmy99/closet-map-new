@@ -23,10 +23,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  #circular_profile_avatar: ^1.0.6
   cupertino_icons: ^1.0.0
-  #flutter_svg: ^0.18.0
   flutter_typeahead: ^1.9.3
+  get_it: ^5.0.4
+  provider: ^4.3.2+4
+  shared_preferences: ^0.5.12+4
 
 dev_dependencies:
   flutter_test:

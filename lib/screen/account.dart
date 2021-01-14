@@ -2,6 +2,7 @@ import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:closet_map/screen/home.dart';
 import 'package:closet_map/screen/my_order.dart';
 import 'package:closet_map/screen/profile.dart';
+import 'package:closet_map/screen/setting.dart';
 import 'package:closet_map/shape_clipper/profile_clipper.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,7 @@ class _ProfileState extends State<Account> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //backgroundColor: Colors.indigo[900],
       bottomNavigationBar: CustomAppBar(),
       body: SingleChildScrollView(
         child: Column(
@@ -29,7 +31,7 @@ class _ProfileState extends State<Account> {
                       child: Container(
                         height: 300.0,
                         decoration: BoxDecoration(
-                          color: Colors.orangeAccent,
+                          color: Colors.orangeAccent, // Colors.blueGrey[800],
                         ),
                       )),
                   Align(
@@ -77,7 +79,7 @@ class _ProfileState extends State<Account> {
             ProfileItem(
                 item: "Setting",
                 press: () {
-                  Navigator.pushReplacement(context, Home.route());
+                  Navigator.pushReplacement(context, MySetting.route());
                 }),
           ],
         ),
@@ -104,7 +106,7 @@ class ProfileItem extends StatelessWidget {
       child: FlatButton(
         padding: EdgeInsets.all(25),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        color: Colors.orangeAccent,
+        color: Colors.orangeAccent, //Colors.blueGrey[600],
         onPressed: press,
         child: Row(
           children: [
