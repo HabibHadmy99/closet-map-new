@@ -7,5 +7,6 @@ class Items {
   final quantity;
   final price;
   final desc;
+  
   Items({this.name, this.brand, this.image, this.quantity, this.price,this.desc});
 }

@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../home.dart';
 import '../shop.dart';
+import 'admin_changeDetails.dart';
 
 
 class AdminHomeScreen extends StatelessWidget {
@@ -45,7 +46,14 @@ class AdminHomeScreen extends StatelessWidget {
                       ),
                   
                   trailing: Icon(Icons.keyboard_arrow_right),
-                  onTap: (){},
+                  onTap: (){
+                    Navigator.push(
+                       context,
+                       MaterialPageRoute(
+                        builder: (context) => ItemChangeForm(itemsList: itemlist[index]),
+                    ),
+                  );
+                  },
                   );
               } ,
               ),
