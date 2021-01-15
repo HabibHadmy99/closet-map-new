@@ -49,84 +49,11 @@ class _OrderState extends State<Order> {
   Scaffold _buildMainScreen() {
     return Scaffold(
         body: MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-      ),
-      home: roundTab,
-    ));
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primarySwatch: Colors.red,
+            ),
+            home: OrderBox() //roundTab,
+            ));
   }
-}
-
-DefaultTabController get roundTab => DefaultTabController(
-    length: 3,
-    child: Scaffold(
-      bottomNavigationBar: CustomAppBar(),
-      appBar: AppBar(
-        title: Text(
-          'My Order',
-          style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 30, color: Colors.white),
-        ),
-        backgroundColor: Colors.orangeAccent,
-        elevation: 0,
-        bottom: TabBar(
-            unselectedLabelColor: Colors.orangeAccent[500],
-            //indicatorSize: TabBarIndicatorSize.label,
-            indicator: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: Colors.redAccent),
-            tabs: [
-              Tab(
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      border: Border.all(color: Colors.orangeAccent, width: 0)),
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text("To Pay"),
-                  ),
-                ),
-              ),
-              Tab(
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      border: Border.all(color: Colors.orangeAccent, width: 0)),
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text("To Ship"),
-                  ),
-                ),
-              ),
-              Tab(
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      border: Border.all(color: Colors.orangeAccent, width: 0)),
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text("To Receive"),
-                  ),
-                ),
-              ),
-            ]),
-      ),
-      body: TabBarView(children: [
-        buildOrderList(),
-        buildOrderList(),
-        buildOrderList(),
-        //Icon(Icons.movie),
-        //Icon(Icons.games),
-      ]),
-    ));
-
-ListView buildOrderList() {
-  return ListView.builder(
-    shrinkWrap: true,
-    itemCount: 3,
-    itemBuilder: (context, index) {
-      return OrderBox();
-    },
-  );
 }
