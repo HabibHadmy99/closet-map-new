@@ -1,37 +1,15 @@
 import 'package:closet_map/List/list.dart';
-import 'package:closet_map/Models/item_model.dart';
-import 'package:closet_map/Services/items_service.dart';
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:flutter/material.dart';
 
-import '../dependencies.dart';
 import 'item_detail.dart';
 
-class ShopScreen extends StatefulWidget {
+class ShopScreen extends StatelessWidget {
   static Route<dynamic> route() =>
       MaterialPageRoute(builder: (_) => ShopScreen());
-  _ShopScreenState createState() => _ShopScreenState();
-}
-
-class _ShopScreenState extends State<ShopScreen> {
-  List<Items> _items;
 
   @override
   Widget build(BuildContext context) {
-    final ItemsDataServiceMock todoDataService = service();
-
-    return FutureBuilder<List<Items>>(
-        future: todoDataService.getItemsList(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            _items = snapshot.data;
-            return _buildShopScreen();
-          }
-          return _buildFetchingDataScreen();
-        });
-  }
-
-  Scaffold _buildShopScreen() {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orangeAccent,
@@ -74,37 +52,21 @@ class _ShopScreenState extends State<ShopScreen> {
                   height: 550.0,
                   child: ListView.builder(
                       scrollDirection: Axis.vertical,
-                      itemCount: _items.length,
+                      itemCount: shirts.length,
                       itemBuilder: (context, index) {
-                        final _item = _items[index];
                         return Container(
                           child: MakeItem(
-                            brand: _item.brand,
-                            image: _item.image,
+                            brand: itemlist[index].brand,
+                            image: itemlist[index].image,
                             context: context,
-                            names: _item.name,
-                            price: _item.price,
+                            names: itemlist[index].name,
+                            price: itemlist[index].price,
                             index: index,
                           ),
                         );
                       }))
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Scaffold _buildFetchingDataScreen() {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            CircularProgressIndicator(),
-            SizedBox(height: 50),
-            Text('Loading items...'),
-          ],
         ),
       ),
     );
