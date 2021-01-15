@@ -1,6 +1,5 @@
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class MySetting extends StatefulWidget {
   static Route<dynamic> route() =>
@@ -66,7 +65,7 @@ class SettingPage extends State<MySetting> {
                   activeColor: Colors.orangeAccent,
                   contentPadding: const EdgeInsets.all(0),
                   title: Text("Dark Mode", style: TextStyle(fontSize: 20)),
-                  value: true,
+                  value: false,
                   onChanged: (value) {})
             ],
           )),
