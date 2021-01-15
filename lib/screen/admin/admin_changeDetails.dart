@@ -1,8 +1,11 @@
 import 'package:closet_map/List/list.dart';
 import 'package:closet_map/Models/item_model.dart';
+import 'package:closet_map/Services/items_service.dart';
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../dependencies.dart';
 
 class ItemChangeForm extends StatefulWidget {
   final Items itemsList;
@@ -12,7 +15,13 @@ class ItemChangeForm extends StatefulWidget {
 }
 
 class _ItemChangeForm extends State<ItemChangeForm> {
-  var q = 6;
+  final ItemsDataServiceMock todoDataService = service();
+  final nameController = TextEditingController();
+  final brandController = TextEditingController();
+  final descController = TextEditingController();
+  final quantityController = TextEditingController();
+  final priceController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,81 +42,63 @@ class _ItemChangeForm extends State<ItemChangeForm> {
         padding: EdgeInsets.all(30),
         child: Column(children: [
           TextField(
-            label: 'Name',
-            initVal: widget.itemsList.name,
-          ),
+              label: 'Name',
+              //initVal: widget.itemsList.name,
+              cont: nameController),
           TextField(
             label: 'Brand',
-            initVal: widget.itemsList.brand,
+            //initVal: widget.itemsList.brand,
+            cont: brandController,
           ),
           TextField(
             label: 'Description',
-            initVal: widget.itemsList.desc,
+            //initVal: widget.itemsList.desc,
             max: 350,
+            cont: descController,
           ),
           //quantity
-          Container(
-            alignment: Alignment.centerLeft,
-            child: Column(
-             crossAxisAlignment: CrossAxisAlignment.start,
-              children:  [
-                Text("Quantity", 
-                  style: TextStyle(
-                    color: Colors.orangeAccent,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-                             Row(
-                children: [
-                  
-                  IconButton(icon: Icon(Icons.add),
-                  onPressed: (){
-                    setState(() {
-                       q += 1;
-                    });
-                  },
-                  iconSize: 15,
-                  splashRadius: 15,),
-                  Text(q.toString(),),
-                  IconButton(icon: Icon(Icons.remove),
-                  onPressed: (){
-                    setState(() {
-                       q -= 1;
-                    });
-                  },
-                  iconSize: 15,
-                  splashRadius: 15,),
-                ],
-                ),
-                
-              ]
-              
-        
-            ),
-            )
+          /*
+          TextField(
+            label: 'Quantity',
+            //initVal: widget.itemsList.desc,
+            cont: quantityController,
+            type: TextInputType.number,
+          ),
+          TextField(
+            label: 'Price',
+            //initVal: widget.itemsList.desc,
+            cont: priceController,
+            type: TextInputType.number,
+          ), */
         ]),
       ),
-            floatingActionButton: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            FloatingActionButton.extended(
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          FloatingActionButton.extended(
               backgroundColor: Colors.green,
               label: const Text('Save'),
               //icon: const Icon(Icons.check_circle),
               heroTag: null,
-              onPressed: (){}
-            ),
-           /* FloatingActionButton.extended(
+              onPressed: () {
+                todoDataService.updateItemsName(
+                    id: widget.itemsList.id,
+                    name: nameController.text,
+                    brand: brandController.text,
+                    desc: descController.text,
+  
+                    );
+              }),
+          /* FloatingActionButton.extended(
+                              price: double.parse(priceController.text),
+                    quant: int.parse(quantityController.text)
               label: const Text('Cancel'),
               icon: const Icon(Icons.cancel),
               heroTag: null,
               onPressed: (){}
             ), */
-          ],
-        ),
+        ],
+      ),
     );
   }
 }
@@ -116,14 +107,18 @@ class TextField extends StatelessWidget {
   final label;
   final initVal;
   final max;
-
-  TextField({this.label, this.initVal,this.max=30});
+  final cont;
+  final type;
+  @override
+  TextField({this.label, this.initVal, this.max = 30, this.cont,this.type = TextInputType.text});
 
   Widget build(BuildContext context) {
     return Container(
       height: 80,
       width: 350,
       child: TextFormField(
+        keyboardType: type,
+        controller: cont,
         cursorColor: Theme.of(context).cursorColor,
         initialValue: initVal,
         maxLength: max,
@@ -142,8 +137,57 @@ class TextField extends StatelessWidget {
   }
 }
 
-class ItemProvider extends ChangeNotifier {
-  void changeName() {
-    //itemlist[index].name = user input in name field
+class Nums extends StatefulWidget {
+  var type;
+  final name;
+  @override
+  Nums({this.type, this.name});
+  _NumsChange createState() => _NumsChange();
+}
+
+class _NumsChange extends State<Nums> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text(
+          widget.name,
+          style: TextStyle(
+            color: Colors.orangeAccent,
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+          textAlign: TextAlign.left,
+        ),
+        Row(
+          children: [
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                setState(() {
+                  widget.type += 1;
+                });
+              },
+              iconSize: 15,
+              splashRadius: 15,
+            ),
+            Text(
+              widget.type.toString(),
+            ),
+            IconButton(
+              icon: Icon(Icons.remove),
+              onPressed: () {
+                setState(() {
+                  widget.type -= 1;
+                });
+              },
+              iconSize: 15,
+              splashRadius: 15,
+            ),
+          ],
+        ),
+      ]),
+    );
   }
 }

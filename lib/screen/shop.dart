@@ -29,7 +29,8 @@ class _ShopScreenState extends State<ShopScreen> {
           return _buildFetchingDataScreen();
         });
   }
-  Scaffold _buildShopScreen(){
+
+  Scaffold _buildShopScreen() {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orangeAccent,
@@ -74,7 +75,7 @@ class _ShopScreenState extends State<ShopScreen> {
                       scrollDirection: Axis.vertical,
                       itemCount: _items.length,
                       itemBuilder: (context, index) {
-                         final _item = _items[index];
+                        final _item = _items[index];
                         return Container(
                           child: MakeItem(
                             brand: _item.brand,
@@ -83,6 +84,7 @@ class _ShopScreenState extends State<ShopScreen> {
                             names: _item.name,
                             price: _item.price,
                             index: index,
+                            items: _item,
                           ),
                         );
                       }))
@@ -92,7 +94,8 @@ class _ShopScreenState extends State<ShopScreen> {
       ),
     );
   }
-    Scaffold _buildFetchingDataScreen() {
+
+  Scaffold _buildFetchingDataScreen() {
     return Scaffold(
       body: Center(
         child: Column(
@@ -135,7 +138,8 @@ class MakeItem extends StatelessWidget {
       @required this.brand,
       @required this.context,
       @required this.price,
-      this.index})
+      this.index,
+      this.items})
       : super(key: key);
 
   final names;
@@ -144,7 +148,9 @@ class MakeItem extends StatelessWidget {
   final context;
   final price;
   final index;
+  final items;
   @override
+  
   Widget build(BuildContext context) {
     return Hero(
       tag: brand,
@@ -153,8 +159,7 @@ class MakeItem extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  ItemDetailScreen(itemsList: itemlist[index]),
+              builder: (context) => ItemDetailScreen(itemsList: items),
             ),
           );
         },

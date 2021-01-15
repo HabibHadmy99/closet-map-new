@@ -38,11 +38,28 @@ class ItemsDataServiceMock implements ItemsDataService {
     return [..._itemlistDatabase];
   }
 
-  //update name,maybe can use only this to update all
-  Future<Items> updateItemsName({int id, String name}) async {
+  //update items
+  Future<Items> updateItemsName(
+      {int id, String name, String brand, String desc}) async {
     final matchedItems = _itemlistDatabase
         .firstWhere((item) => item.id == id); //checkmatching item
-    matchedItems.name = name;
+
+    if (name.length != 0) {
+      matchedItems.name = name;
+    } else if (brand.length != 0) {
+      matchedItems.brand = brand;
+    } else if (desc.length != 0) {
+      matchedItems.desc = desc;
+    }
+
+    /*matchedItems.name = name;
+    matchedItems.brand = brand;
+    matchedItems.desc = desc; 
+    else if (quant != 0) {
+      matchedItems.quantity = quant;
+    }else if (price != 0) {
+      matchedItems.price = price;
+    }*/
     return matchedItems;
   }
 
