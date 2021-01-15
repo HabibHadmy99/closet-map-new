@@ -1,6 +1,10 @@
+import 'package:closet_map/List/user.dart';
+import 'package:closet_map/Models/mock_user.dart';
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../dependencies.dart';
 
 class MyProfile extends StatefulWidget {
   static Route<dynamic> route() =>
@@ -10,10 +14,25 @@ class MyProfile extends StatefulWidget {
 }
 
 class _UserState extends State<MyProfile> {
+  List<User> user;
   bool _passwordVisible = true;
 
   @override
   Widget build(BuildContext context) {
+    final UserDataServiceMock userDataService = service();
+
+    return FutureBuilder<List<User>>(
+        future: userDataService.getUserList(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            user = snapshot.data;
+            return _buildMainScreen();
+          }
+          return _buildFetchingDataScreen();
+        });
+  }
+
+  Scaffold _buildMainScreen() {
     return Scaffold(
       bottomNavigationBar: CustomAppBar(),
       appBar: AppBar(
@@ -177,6 +196,21 @@ class _UserState extends State<MyProfile> {
                 ),
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Scaffold _buildFetchingDataScreen() {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            CircularProgressIndicator(),
+            SizedBox(height: 50),
+            Text('Fetching todo... Please wait'),
           ],
         ),
       ),

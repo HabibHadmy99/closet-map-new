@@ -1,8 +1,12 @@
+import 'package:closet_map/List/list.dart';
+import 'package:closet_map/Models/item_model.dart';
+import 'package:closet_map/Services/items_service.dart';
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:closet_map/shape_clipper/Shape4HomeTop.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'account.dart';
-import 'login.dart';
+import 'signin.dart';
 
 List<String> setupOption = ['User Setting', 'Logout'];
 
@@ -12,7 +16,12 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(children: <Widget>[HomeTopScreen(username: 'Habib Hadmy',headerWords: 'Let\'s Start \nShopping !!',)]),
+      body: Column(children: <Widget>[
+        HomeTopScreen(
+          username: 'Habib Hadmy',
+          headerWords: 'Let\'s Start \nShopping !!',
+        )
+      ]),
       bottomNavigationBar: CustomAppBar(),
     );
   }
@@ -22,15 +31,12 @@ class HomeTopScreen extends StatefulWidget {
   final headerWords;
   final username;
 
-  HomeTopScreen({this.username,this.headerWords});
+  HomeTopScreen({this.username, this.headerWords});
   @override
   _HomeTopScreenState createState() => _HomeTopScreenState();
 }
 
 class _HomeTopScreenState extends State<HomeTopScreen> {
-
-
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -86,7 +92,7 @@ class _HomeTopScreenState extends State<HomeTopScreen> {
                             Navigator.pushReplacement(context, Account.route());
                           } else {
                             Navigator.pushReplacement(
-                                context, LoginScreen.route());
+                                context, SigninScreen.route());
                           } //Logout
                         },
                       ),
