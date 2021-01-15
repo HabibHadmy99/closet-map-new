@@ -49,7 +49,7 @@ class ShopScreen extends StatelessWidget {
                 height: 20,
               ),
               Container(
-                  height:550.0,
+                  height: 550.0,
                   child: ListView.builder(
                       scrollDirection: Axis.vertical,
                       itemCount: shirts.length,
@@ -93,15 +93,15 @@ class Categories extends StatelessWidget {
 }
 
 class MakeItem extends StatelessWidget {
-  const MakeItem({
-    Key key,
-    @required this.names,
-    @required this.image,
-    @required this.brand,
-    @required this.context,
-    @required this.price,
-    this.index
-  }) : super(key: key);
+  const MakeItem(
+      {Key key,
+      @required this.names,
+      @required this.image,
+      @required this.brand,
+      @required this.context,
+      @required this.price,
+      this.index})
+      : super(key: key);
 
   final names;
   final image;
@@ -118,7 +118,8 @@ class MakeItem extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ItemDetailScreen(itemsList: itemlist[index]),
+              builder: (context) =>
+                  ItemDetailScreen(itemsList: itemlist[index]),
             ),
           );
         },
