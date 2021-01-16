@@ -9,6 +9,8 @@ class MySetting extends StatefulWidget {
 }
 
 class SettingPage extends State<MySetting> {
+  String valueChoose;
+  List listTheme = ["Blue Theme", "Red Theme"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,48 +27,50 @@ class SettingPage extends State<MySetting> {
         ),
       ),
       body: SingleChildScrollView(
-          padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+          padding: EdgeInsets.fromLTRB(35, 0, 15, 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0)),
-                  margin: const EdgeInsets.fromLTRB(32.0, 30.0, 32.0, 16.0),
-                  color: Colors.orangeAccent,
-                  child: Column(
-                    children: <Widget>[
-                      ListTile(
-                        contentPadding: EdgeInsets.fromLTRB(15, 7.5, 15, 7.5),
-                        leading: Icon(Icons.lock_outlined, color: Colors.white),
-                        title: Text("Change Password",
-                            style: TextStyle(fontSize: 20)),
-                        trailing: Icon(Icons.keyboard_arrow_right),
-                        onTap: () {},
-                      ),
-                      buildContainer(),
-                      ListTile(
-                        contentPadding: EdgeInsets.fromLTRB(15, 7.5, 15, 7.5),
-                        leading: Icon(Icons.location_on, color: Colors.white),
-                        title: Text("Change Address",
-                            style: TextStyle(fontSize: 20)),
-                        trailing: Icon(Icons.keyboard_arrow_right),
-                        onTap: () {},
-                      ),
-                    ],
-                  )),
               const SizedBox(height: 10.0),
               Text("Mode Setting",
                   style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                       color: Colors.black)),
-              SwitchListTile(
-                  activeColor: Colors.orangeAccent,
-                  contentPadding: const EdgeInsets.all(0),
-                  title: Text("Dark Mode", style: TextStyle(fontSize: 20)),
-                  value: false,
-                  onChanged: (value) {})
+              SizedBox(height: 15),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Container(
+                  padding: EdgeInsets.only(left: 16, right: 16),
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 1),
+                      borderRadius: BorderRadius.circular(15)),
+                  child: DropdownButton(
+                    dropdownColor: Colors.orange[200],
+                    icon: Icon(Icons.arrow_drop_down),
+                    iconSize: 36,
+                    isExpanded: true,
+                    underline: SizedBox(),
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                    ),
+                    hint: Text("Select Color"),
+                    value: valueChoose,
+                    onChanged: (newValue) {
+                      setState(() {
+                        valueChoose = newValue;
+                      });
+                    },
+                    items: listTheme.map((valueItem) {
+                      return DropdownMenuItem(
+                        value: valueItem,
+                        child: Text(valueItem),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              )
             ],
           )),
     );
