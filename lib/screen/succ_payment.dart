@@ -70,7 +70,12 @@ class Scpayment extends StatelessWidget {
         children: [
           RaisedButton(
             onPressed: () {
-              Navigator.pushReplacement(context, Home.route(user));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Home(),
+                  ),
+                );
             },
             textColor: Colors.white,
             padding: const EdgeInsets.all(.0),
