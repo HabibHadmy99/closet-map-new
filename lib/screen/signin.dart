@@ -2,7 +2,6 @@ import 'package:closet_map/List/user.dart';
 import 'package:closet_map/Services/user_data_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import '../dependencies.dart';
 import 'admin/admin_home.dart';
 import 'home.dart';
@@ -129,31 +128,13 @@ class _SigninScreenState extends State<SigninScreen> {
         elevation: 5.0,
         onPressed: () async {
           final User success = await userDS.signin(_email, _password);
-          if (success.type == 'user') {
-            Navigator.pushReplacement(context, Home.route());
+          if (success == null) {
+            showAlertDialog(context);
           } else if (success.type == 'admin') {
             Navigator.pushReplacement(context, AdminHomeScreen.route());
-          } else
-            showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text("Error "),
-                    content: Text("Incorrect name or password"),
-                    actions: <Widget>[
-                      FlatButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Text("Back",
-                            style: TextStyle(
-                                fontSize: 20.0,
-                                color: Color(0xff00556A),
-                                fontFamily: 'Lato Black')),
-                      ),
-                    ],
-                  );
-                });
+          } else if (success.type == 'user') {
+            Navigator.pushReplacement(context, Home.route());
+          }
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
@@ -251,4 +232,34 @@ class _SigninScreenState extends State<SigninScreen> {
       ),
     );
   }
+}
+
+Future<void> showAlertDialog(BuildContext context) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Login Failed'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text('Please enter a valid username and password.'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text('Retry'),
+            onPressed: () {
+              Navigator.of(context).pop();
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return SigninScreen();
+              }));
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

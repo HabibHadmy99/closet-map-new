@@ -21,11 +21,9 @@ List globalUserList = [
 
 class UserDataServiceMock implements UserDataService {
   User current;
-  User currentUser;
-  User currentName;
 
   Future signout() async {
-    currentUser = null;
+    current = null;
   }
 
   Future newSignup({
@@ -42,16 +40,12 @@ class UserDataServiceMock implements UserDataService {
         contact: contact,
         address: address,
         password: password,
-        type: 'user');
+        type: type);
     globalUserList.add(newUser);
   }
 
-  Future<User> getCurrentUserName() async {
-    return currentName;
-  }
-
   Future<User> getCurrentUser() async {
-    return currentUser;
+    return current;
   }
 
   Future updateUser({
@@ -89,11 +83,9 @@ class UserDataServiceMock implements UserDataService {
     return user;
   }
 
-  @override
   Future<User> signin(String email, String password) async {
     for (var user in globalUserList) {
       if (email == user.email && password == user.password) {
-        currentName = user.name;
         current = user;
         return Future.value(user);
       }

@@ -1,6 +1,7 @@
 import 'package:closet_map/Services/user_data_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:closet_map/Models/mock_user.dart' as data;
 
 import '../dependencies.dart';
 import 'signin.dart';
@@ -19,7 +20,7 @@ class _SignupScreenState extends State<SignUpScreen> {
   String password;
   String contact;
   String address;
-  String type = "user";
+  String type;
   final UserDataService userDS = service();
 
   Widget _buildEmail() {
