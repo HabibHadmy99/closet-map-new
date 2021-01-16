@@ -49,7 +49,7 @@ class CustomAppBar extends StatelessWidget {
             } else if (_onItemTapped == 2) {
               Navigator.pushReplacement(context, CartScreen.route());
             } else {
-              Navigator.pushReplacement(context, Account.route());
+              Navigator.pushReplacement(context, Account.route(user));
             }
           }),
     );

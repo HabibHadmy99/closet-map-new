@@ -1,28 +1,37 @@
+import 'dart:developer';
+
 import 'package:closet_map/List/user.dart';
 import 'package:closet_map/Models/mock_user.dart';
+import 'package:closet_map/Services/user_data_service.dart';
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../dependencies.dart';
 
+User user;
+
 class MyProfile extends StatefulWidget {
-  static Route<dynamic> route() =>
-      MaterialPageRoute(builder: (_) => MyProfile());
+  static Route<dynamic> route(current) {
+    user = current;
+    return MaterialPageRoute(builder: (_) => MyProfile());
+  }
+
   @override
   _UserState createState() => _UserState();
 }
 
 class _UserState extends State<MyProfile> {
-  List<User> user;
+  //User user;
   bool _passwordVisible = true;
 
   @override
   Widget build(BuildContext context) {
-    final UserDataServiceMock userDataService = service();
+    final UserDataService userDataService = service();
 
-    return FutureBuilder<List<User>>(
-        future: userDataService.getUserList(),
+    return FutureBuilder<User>(
+        future: userDataService.getCurrentUser(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             user = snapshot.data;
@@ -33,6 +42,13 @@ class _UserState extends State<MyProfile> {
   }
 
   Scaffold _buildMainScreen() {
+    String name;
+    String email;
+    String contact;
+    String address;
+    String password;
+    //final ModeNotifier = Provider.of<ValueNotifier<bool>>(context);
+
     return Scaffold(
       bottomNavigationBar: CustomAppBar(),
       appBar: AppBar(
@@ -72,11 +88,11 @@ class _UserState extends State<MyProfile> {
                               AssetImage("assets/images/profile.png"),
                           radius: 60.0,
                         ),
-                        SizedBox(height: 4.0),
+                        SizedBox(height: 10.0),
                         Text(
-                          "Habib Hadmy",
+                          user.name,
                           style: TextStyle(
-                            fontSize: 21.0,
+                            fontSize: 15.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -91,8 +107,9 @@ class _UserState extends State<MyProfile> {
               height: 80,
               width: 350,
               child: TextFormField(
+                initialValue: user.name,
+                onChanged: (value) => name = value,
                 cursorColor: Theme.of(context).cursorColor,
-                initialValue: 'Habib Hadmy Bin Zulkafli',
                 maxLength: 30,
                 decoration: InputDecoration(
                   labelText: 'Full Name',
@@ -110,10 +127,11 @@ class _UserState extends State<MyProfile> {
               height: 80,
               width: 350,
               child: TextFormField(
+                onChanged: (value) => password = value,
                 cursorColor: Theme.of(context).cursorColor,
                 maxLength: 20,
                 obscureText: _passwordVisible,
-                initialValue: 'Habibun99',
+                initialValue: user.password,
                 decoration: InputDecoration(
                   labelText: 'Password',
                   suffixIcon: IconButton(
@@ -142,8 +160,9 @@ class _UserState extends State<MyProfile> {
               height: 80,
               width: 350,
               child: TextFormField(
+                onChanged: (value) => email = value,
                 cursorColor: Theme.of(context).cursorColor,
-                initialValue: 'HabibHadmy99@gmail.com',
+                initialValue: user.email,
                 maxLength: 30,
                 decoration: InputDecoration(
                   labelText: 'Email',
@@ -161,8 +180,9 @@ class _UserState extends State<MyProfile> {
               height: 80,
               width: 350,
               child: TextFormField(
+                onChanged: (value) => user.contact,
                 cursorColor: Theme.of(context).cursorColor,
-                initialValue: '01234567891',
+                initialValue: user.contact,
                 maxLength: 110,
                 decoration: InputDecoration(
                   labelText: 'Contact',
@@ -180,9 +200,9 @@ class _UserState extends State<MyProfile> {
               height: 80,
               width: 350,
               child: TextFormField(
+                onChanged: (value) => address = value,
                 cursorColor: Theme.of(context).cursorColor,
-                initialValue:
-                    'Jalan Sultan Salahuddin, Kuala Lumpur, 50480 Kuala Lumpur Wilayah Persekutuan Kuala Lumpur',
+                initialValue: user.address,
                 maxLength: 190,
                 decoration: InputDecoration(
                   labelText: 'Shipping Address',
@@ -196,6 +216,19 @@ class _UserState extends State<MyProfile> {
                 ),
               ),
             ),
+            FlatButton(
+              color: Colors.orangeAccent,
+              onPressed: () {
+                UserDataService userDataService = service();
+                userDataService.updateUser(
+                    name: name,
+                    contact: contact,
+                    address: address,
+                    email: email,
+                    password: password);
+              },
+              child: Text('Save'),
+            )
           ],
         ),
       ),

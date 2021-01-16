@@ -69,20 +69,25 @@ class UserDataServiceMock implements UserDataService {
     String address,
     String password,
   }) async {
-    if (name == null ||
-        email == null ||
-        contact == null ||
-        address == null ||
-        password == null) {
+    if (name == null) {
       name = current.name;
+    }
+    if (email == null) {
       email = current.email;
+    }
+    if (contact == null) {
       contact = current.contact;
+    }
+    if (address == null) {
       address = current.address;
+    }
+    if (password == null) {
       password = current.password;
     }
+
     current.name = name;
-    current.email = email;
     current.contact = contact;
+    current.email = email;
     current.address = address;
     current.password = password;
   }
