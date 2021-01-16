@@ -20,7 +20,7 @@ class Account extends StatefulWidget {
 
 class _ProfileState extends State<Account> {
   final UserDataService userDS = service();
-List<BottomNavigationBarItem> navBar() {
+  List<BottomNavigationBarItem> navBar() {
     List<BottomNavigationBarItem> currentNav;
     if (userDS.getCurrentUsertype() == 'user') {
       currentNav = userNavBar;
@@ -29,6 +29,7 @@ List<BottomNavigationBarItem> navBar() {
     }
     return currentNav;
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

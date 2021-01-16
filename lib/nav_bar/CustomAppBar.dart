@@ -42,9 +42,9 @@ List<BottomNavigationBarItem> adminNavBar = [
     icon: Icon(Icons.switch_account),
     label: 'Account',
   ),
-
 ];
 
+// ignore: must_be_immutable
 class CustomAppBar extends StatelessWidget {
   final navtype;
 
@@ -60,16 +60,14 @@ class CustomAppBar extends StatelessWidget {
           iconSize: 25,
           selectedFontSize: 15,
           unselectedFontSize: 10,
-         items: navtype,
-          
+          items: navtype,
           selectedItemColor: Colors.deepOrangeAccent[400],
           onTap: (_onItemTapped) async {
             final User user = await userDS.getCurrentUser();
             if (_onItemTapped == 0) {
-              if(user.type == 'user'){
+              if (user.type == 'user') {
                 Navigator.pushReplacement(context, Home.route(user));
-                }
-              else if(user.type == 'admin'){
+              } else if (user.type == 'admin') {
                 Navigator.pushReplacement(context, AdminHomeScreen.route(user));
               }
             } else if (_onItemTapped == 1) {

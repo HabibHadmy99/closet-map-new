@@ -184,7 +184,7 @@ class HomeBottomScreenState extends State<HomeBottomScreen> {
         ),
         SingleChildScrollView(
             child: Container(
-                height: 425.0,
+                height: 375.0,
                 child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     itemCount: _items.length,

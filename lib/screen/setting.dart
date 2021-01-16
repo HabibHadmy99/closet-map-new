@@ -13,7 +13,7 @@ class MySetting extends StatefulWidget {
 
 class SettingPage extends State<MySetting> {
   final UserDataService userDS = service();
-List<BottomNavigationBarItem> navBar() {
+  List<BottomNavigationBarItem> navBar() {
     List<BottomNavigationBarItem> currentNav;
     if (userDS.getCurrentUsertype() == 'user') {
       currentNav = userNavBar;
@@ -22,14 +22,18 @@ List<BottomNavigationBarItem> navBar() {
     }
     return currentNav;
   }
+
+  int index = 0;
   String valueChoose;
-  List listTheme = ["Blue Theme", "Red Theme"];
+  String mode = 'Orange Theme';
+  //List listTheme = ["Blue Theme", "Red Theme"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CustomAppBar(navtype: navBar()),
       appBar: AppBar(
-        backgroundColor: Colors.orangeAccent,
+        backgroundColor:
+            index == 0 ? Colors.orangeAccent : Colors.deepOrangeAccent,
         title: Text(
           'Settings',
           style: TextStyle(
@@ -40,7 +44,7 @@ List<BottomNavigationBarItem> navBar() {
         ),
       ),
       body: SingleChildScrollView(
-          padding: EdgeInsets.fromLTRB(35, 0, 15, 0),
+          padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -50,40 +54,28 @@ List<BottomNavigationBarItem> navBar() {
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                       color: Colors.black)),
-              SizedBox(height: 15),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Container(
-                  padding: EdgeInsets.only(left: 16, right: 16),
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 1),
-                      borderRadius: BorderRadius.circular(15)),
-                  child: DropdownButton(
-                    dropdownColor: Colors.orange[200],
-                    icon: Icon(Icons.arrow_drop_down),
-                    iconSize: 36,
-                    isExpanded: true,
-                    underline: SizedBox(),
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                    ),
-                    hint: Text("Select Color"),
-                    value: valueChoose,
-                    onChanged: (newValue) {
-                      setState(() {
-                        valueChoose = newValue;
-                      });
-                    },
-                    items: listTheme.map((valueItem) {
-                      return DropdownMenuItem(
-                        value: valueItem,
-                        child: Text(valueItem),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              )
+              RadioListTile(
+                groupValue: index,
+                title: Text('Orange Theme'),
+                value: 0,
+                onChanged: (value) async {
+                  //ColorIndex(0);
+                  setState(() {
+                    index = value;
+                  });
+                },
+              ),
+              RadioListTile(
+                groupValue: index,
+                title: Text('Red Theme'),
+                value: 1,
+                onChanged: (value) async {
+                  //ColorIndex(1);
+                  setState(() {
+                    index = value;
+                  });
+                },
+              ),
             ],
           )),
     );
