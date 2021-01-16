@@ -176,7 +176,7 @@ class HomeBottomScreenState extends State<HomeBottomScreen> {
               ),
               Spacer(),
               Text(
-                "VIEW ALL(${null})",
+                "VIEW ALL(${_items.length})",
                 style: viewAllStyle,
               )
             ],
