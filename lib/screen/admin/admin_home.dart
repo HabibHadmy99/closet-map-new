@@ -1,5 +1,6 @@
 
 import 'package:closet_map/List/list.dart';
+import 'package:closet_map/List/user.dart';
 import 'package:closet_map/Models/item_model.dart';
 import 'package:closet_map/Services/items_service.dart';
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
@@ -10,17 +11,19 @@ import '../home.dart';
 import '../shop.dart';
 import 'admin_changeDetails.dart';
 
-
+User user;
 class AdminHomeScreen extends StatelessWidget {
   List<Items> _items;
-  static Route<dynamic> route() =>
-      MaterialPageRoute(builder: (_) => AdminHomeScreen());
-
+  static Route<dynamic> route(current) {
+      user = current;
+      return MaterialPageRoute(builder: (_) => AdminHomeScreen());
+}
   @override
 
   Widget build(BuildContext context) {
     
     final ItemsDataServiceMock todoDataService = service();
+
 
     return FutureBuilder<List<Items>>(
         future: todoDataService.getItemsList(),
@@ -39,7 +42,7 @@ class AdminHomeScreen extends StatelessWidget {
       bottomNavigationBar: CustomAppBar(),
       body: Column(
         children: <Widget>[
-          HomeTopScreen(username: 'AdminUser',headerWords: 'Welcome, Admin',),
+          HomeTopScreen(username: user.name ,headerWords: 'Welcome, \n'+ user.name,),
           Container(
             padding: EdgeInsets.only(left: 20),
             alignment: Alignment.centerLeft,
@@ -82,11 +85,11 @@ class AdminHomeScreen extends StatelessWidget {
           )
           ],
         ),
-       floatingActionButton: FloatingActionButton(
+     /*  floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: Colors.pinkAccent,
         onPressed: () {},
-      ),
+      ), */
     );
   }
 

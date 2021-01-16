@@ -131,7 +131,7 @@ class _SigninScreenState extends State<SigninScreen> {
           if (user == null) {
             showAlertDialog(context);
           } else if (user.type == 'admin') {
-            Navigator.pushReplacement(context, AdminHomeScreen.route());
+            Navigator.pushReplacement(context, AdminHomeScreen.route(user));
           } else if (user.type == 'user') {
             Navigator.pushReplacement(context, Home.route(user));
           }

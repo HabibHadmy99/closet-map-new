@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../dependencies.dart';
+import 'admin_home.dart';
 
 class ItemChangeForm extends StatefulWidget {
   final Items itemsList;
@@ -42,15 +43,18 @@ class _ItemChangeForm extends State<ItemChangeForm> {
         padding: EdgeInsets.all(30),
         child: Column(children: [
           TextField(
+              hint: widget.itemsList.name,
               label: 'Name',
               //initVal: widget.itemsList.name,
               cont: nameController),
           TextField(
+            hint: widget.itemsList.brand,
             label: 'Brand',
             //initVal: widget.itemsList.brand,
             cont: brandController,
           ),
           TextField(
+            hint: widget.itemsList.desc,
             label: 'Description',
             //initVal: widget.itemsList.desc,
             max: 350,
@@ -82,12 +86,17 @@ class _ItemChangeForm extends State<ItemChangeForm> {
               heroTag: null,
               onPressed: () {
                 todoDataService.updateItemsName(
-                    id: widget.itemsList.id,
-                    name: nameController.text,
-                    brand: brandController.text,
-                    desc: descController.text,
-  
-                    );
+                  id: widget.itemsList.id,
+                  name: nameController.text,
+                  brand: brandController.text,
+                  desc: descController.text,
+                );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AdminHomeScreen(),
+                  ),
+                );
               }),
           /* FloatingActionButton.extended(
                               price: double.parse(priceController.text),
@@ -109,20 +118,30 @@ class TextField extends StatelessWidget {
   final max;
   final cont;
   final type;
+  final hint;
   @override
-  TextField({this.label, this.initVal, this.max = 30, this.cont,this.type = TextInputType.text});
+  TextField(
+      {this.hint,
+      this.label,
+      this.initVal,
+      this.max = 30,
+      this.cont,
+      this.type = TextInputType.text});
 
   Widget build(BuildContext context) {
     return Container(
       height: 80,
       width: 350,
       child: TextFormField(
+        
         keyboardType: type,
         controller: cont,
         cursorColor: Theme.of(context).cursorColor,
         initialValue: initVal,
         maxLength: max,
         decoration: InputDecoration(
+      
+          hintText: hint,
           labelText: label,
           labelStyle: TextStyle(
               color: Colors.orangeAccent,
