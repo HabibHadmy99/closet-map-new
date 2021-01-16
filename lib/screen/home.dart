@@ -103,7 +103,7 @@ class _HomeTopScreenState extends State<HomeTopScreen> {
                           onSelected: (value) {
                             if (value == 0) {
                               Navigator.pushReplacement(
-                                  context, Account.route());
+                                  context, Account.route(user));
                             } else {
                               Navigator.pushReplacement(
                                   context, SigninScreen.route());

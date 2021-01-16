@@ -1,5 +1,4 @@
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
-import 'package:closet_map/screen/home.dart';
 import 'package:closet_map/screen/my_order.dart';
 import 'package:closet_map/screen/profile.dart';
 import 'package:closet_map/screen/setting.dart';
@@ -7,7 +6,11 @@ import 'package:closet_map/shape_clipper/profile_clipper.dart';
 import 'package:flutter/material.dart';
 
 class Account extends StatefulWidget {
-  static Route<dynamic> route() => MaterialPageRoute(builder: (_) => Account());
+  static Route<dynamic> route(current) {
+    user = current;
+    return MaterialPageRoute(builder: (_) => Account());
+  }
+
   @override
   _ProfileState createState() => _ProfileState();
 }
@@ -22,7 +25,7 @@ class _ProfileState extends State<Account> {
         child: Column(
           children: <Widget>[
             Container(
-              height: 300.0,
+              height: 250.0,
               child: Stack(
                 children: <Widget>[
                   Container(),
@@ -35,7 +38,7 @@ class _ProfileState extends State<Account> {
                         ),
                       )),
                   Align(
-                    alignment: Alignment(0, 2.25),
+                    alignment: Alignment(0, 2.15),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
@@ -44,9 +47,9 @@ class _ProfileState extends State<Account> {
                               AssetImage("assets/images/profile.png"),
                           radius: 60.0,
                         ),
-                        SizedBox(height: 4.0),
+                        SizedBox(height: 20),
                         Text(
-                          "Habib Hadmy",
+                          '${user.name}',
                           style: TextStyle(
                             fontSize: 21.0,
                             fontWeight: FontWeight.bold,
@@ -64,12 +67,12 @@ class _ProfileState extends State<Account> {
               ),
             ),
             SizedBox(
-              height: 60,
+              height: 90,
             ),
             ProfileItem(
                 item: "My Profile",
                 press: () {
-                  Navigator.pushReplacement(context, MyProfile.route());
+                  Navigator.pushReplacement(context, MyProfile.route(user));
                 }),
             ProfileItem(
                 item: "My Order",
