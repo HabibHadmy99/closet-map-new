@@ -1,8 +1,14 @@
+import 'package:closet_map/List/user.dart';
+import 'package:closet_map/Services/user_data_service.dart';
 import 'package:closet_map/screen/account.dart';
 import 'package:closet_map/screen/cart.dart';
 import 'package:closet_map/screen/home.dart';
 import 'package:closet_map/screen/shop.dart';
 import 'package:flutter/material.dart';
+
+import '../dependencies.dart';
+
+final UserDataService userDS = service();
 
 class CustomAppBar extends StatelessWidget {
   @override
@@ -34,9 +40,10 @@ class CustomAppBar extends StatelessWidget {
             ),
           ],
           selectedItemColor: Colors.deepOrangeAccent[400],
-          onTap: (_onItemTapped) {
+          onTap: (_onItemTapped) async {
+            final User user = await userDS.getCurrentUser();
             if (_onItemTapped == 0) {
-              Navigator.pushReplacement(context, Home.route());
+              Navigator.pushReplacement(context, Home.route(user));
             } else if (_onItemTapped == 1) {
               Navigator.pushReplacement(context, ShopScreen.route());
             } else if (_onItemTapped == 2) {

@@ -127,13 +127,13 @@ class _SigninScreenState extends State<SigninScreen> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () async {
-          final User success = await userDS.signin(_email, _password);
-          if (success == null) {
+          final User user = await userDS.signin(_email, _password);
+          if (user == null) {
             showAlertDialog(context);
-          } else if (success.type == 'admin') {
+          } else if (user.type == 'admin') {
             Navigator.pushReplacement(context, AdminHomeScreen.route());
-          } else if (success.type == 'user') {
-            Navigator.pushReplacement(context, Home.route());
+          } else if (user.type == 'user') {
+            Navigator.pushReplacement(context, Home.route(user));
           }
         },
         padding: EdgeInsets.all(15.0),

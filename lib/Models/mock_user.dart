@@ -11,11 +11,25 @@ List globalUserList = [
       address: 'Kg Parit Mahang, Jeram, Selangor',
       type: 'user'),
   User(
+      name: 'Jasmin Fareena',
+      email: 'jasmin@gmail.com',
+      contact: '012984178',
+      password: '12345678',
+      address: 'Ampang, Selangor',
+      type: 'user'),
+  User(
       name: 'Haris Hashemeen',
       email: 'haris@gmail.com',
       contact: '0123412313',
       password: '12345678',
       address: 'Kg Iskandar, Taman FamilyMart, Kelantan ',
+      type: 'admin'),
+  User(
+      name: 'Mirhanieza',
+      email: 'mir@gmail.com',
+      contact: '0123412313',
+      password: '12345678',
+      address: 'Johor ',
       type: 'admin'),
 ];
 

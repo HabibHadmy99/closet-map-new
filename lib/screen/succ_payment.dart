@@ -1,4 +1,6 @@
 import 'package:closet_map/List/list.dart';
+import 'package:closet_map/List/user.dart';
+import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:closet_map/screen/home.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +8,8 @@ class Scpayment extends StatelessWidget {
   static String routeName = "/cart";
   static Route<dynamic> route() =>
       MaterialPageRoute(builder: (_) => Scpayment());
+
+  Future<User> user = userDS.getCurrentUser();
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +21,9 @@ class Scpayment extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           color: Colors.black,
-          onPressed: () => Navigator.pushReplacement(context, Home.route()),
+          onPressed: () {
+            Navigator.pushReplacement(context, Home.route(user));
+          },
         ),
       ),
       body: Stack(
@@ -63,7 +69,9 @@ class Scpayment extends StatelessWidget {
       child: Column(
         children: [
           RaisedButton(
-            onPressed: () => Navigator.pushReplacement(context, Home.route()),
+            onPressed: () {
+              Navigator.pushReplacement(context, Home.route(user));
+            },
             textColor: Colors.white,
             padding: const EdgeInsets.all(.0),
             child: Container(

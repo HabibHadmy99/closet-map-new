@@ -1,4 +1,5 @@
 import 'package:closet_map/List/list.dart';
+import 'package:closet_map/List/user.dart';
 import 'package:closet_map/Models/item_model.dart';
 import 'package:closet_map/Services/items_service.dart';
 
@@ -10,16 +11,20 @@ import 'account.dart';
 import 'signin.dart';
 
 List<String> setupOption = ['User Setting', 'Logout'];
+User user;
 
 class Home extends StatelessWidget {
-  static Route<dynamic> route() => MaterialPageRoute(builder: (_) => Home());
+  static Route<dynamic> route(current) {
+    user = current;
+    return MaterialPageRoute(builder: (_) => Home());
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(children: <Widget>[
         HomeTopScreen(
-          username: 'Habib Hadmy',
+          username: '${user.name}',
           headerWords: 'Let\'s Start \nShopping !!',
         ),
         HomeBottomScreen()
