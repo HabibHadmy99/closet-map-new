@@ -46,10 +46,10 @@ class ItemsDataServiceMock implements ItemsDataService {
 
     if (name.length != 0) {
       matchedItems.name = name;
-    } 
+    }
     if (brand.length != 0) {
       matchedItems.brand = brand;
-    } 
+    }
     if (desc.length != 0) {
       matchedItems.desc = desc;
     }

@@ -222,9 +222,9 @@ class _UserState extends State<MyProfile> {
                 UserDataService userDataService = service();
                 userDataService.updateUser(
                     name: name,
+                    email: email,
                     contact: contact,
                     address: address,
-                    email: email,
                     password: password);
               },
               child: Text('Save'),
