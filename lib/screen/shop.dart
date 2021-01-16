@@ -1,13 +1,42 @@
 import 'package:closet_map/List/list.dart';
+<<<<<<< Updated upstream
+=======
+import 'package:closet_map/Models/item_model.dart';
+import 'package:closet_map/Services/items_service.dart';
+import 'package:closet_map/Services/user_data_service.dart';
+>>>>>>> Stashed changes
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
+import 'package:closet_map/screen/home.dart';
 import 'package:flutter/material.dart';
 
 import 'item_detail.dart';
 
+<<<<<<< Updated upstream
 class ShopScreen extends StatelessWidget {
+=======
+final UserDataService userDS = service();
+
+class ShopScreen extends StatefulWidget {
+>>>>>>> Stashed changes
   static Route<dynamic> route() =>
       MaterialPageRoute(builder: (_) => ShopScreen());
 
+<<<<<<< Updated upstream
+=======
+class _ShopScreenState extends State<ShopScreen> {
+  List<Items> _items;
+
+  List<BottomNavigationBarItem> navBar() {
+    List<BottomNavigationBarItem> currentNav;
+    if (userDS.getCurrentUsertype() == 'user') {
+      currentNav = userNavBar;
+    } else if (userDS.getCurrentUsertype() == 'admin') {
+      currentNav = adminNavBar;
+    }
+    return currentNav;
+  }
+
+>>>>>>> Stashed changes
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +45,7 @@ class ShopScreen extends StatelessWidget {
         title: new Center(child: new Text("SHOP", textAlign: TextAlign.center)),
       ),
       backgroundColor: Colors.white,
-      bottomNavigationBar: CustomAppBar(),
+      bottomNavigationBar: CustomAppBar(navtype: navBar(),),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(20),

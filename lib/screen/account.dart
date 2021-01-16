@@ -13,11 +13,21 @@ class Account extends StatefulWidget {
 }
 
 class _ProfileState extends State<Account> {
+
+  List<BottomNavigationBarItem> navBar() {
+    List<BottomNavigationBarItem> currentNav;
+    if (userDS.getCurrentUsertype() == 'user') {
+      currentNav = userNavBar;
+    } else if (userDS.getCurrentUsertype() == 'admin') {
+      currentNav = adminNavBar;
+    }
+    return currentNav;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //backgroundColor: Colors.indigo[900],
-      bottomNavigationBar: CustomAppBar(),
+      bottomNavigationBar: CustomAppBar(navtype: navBar(),),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[

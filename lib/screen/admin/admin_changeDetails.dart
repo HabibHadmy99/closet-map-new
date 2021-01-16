@@ -16,7 +16,7 @@ class _ItemChangeForm extends State<ItemChangeForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomAppBar(),
+      bottomNavigationBar: CustomAppBar(navtype: adminNavBar,),
       appBar: AppBar(
         title: Text(
           widget.itemsList.name,

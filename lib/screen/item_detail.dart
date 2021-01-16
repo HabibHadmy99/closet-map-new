@@ -15,6 +15,15 @@ class ItemDetailScreen extends StatefulWidget {
 }
 
 class _ItemDetailScreen extends State<ItemDetailScreen> {
+  List<BottomNavigationBarItem> navBar() {
+    List<BottomNavigationBarItem> currentNav;
+    if (userDS.getCurrentUsertype() == 'user') {
+      currentNav = userNavBar;
+    } else if (userDS.getCurrentUsertype() == 'admin') {
+      currentNav = adminNavBar;
+    }
+    return currentNav;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +32,7 @@ class _ItemDetailScreen extends State<ItemDetailScreen> {
         title: new Center(child: new Text("Shop", textAlign: TextAlign.center)),
       ),
       backgroundColor: Colors.white,
-      bottomNavigationBar: CustomAppBar(),
+      bottomNavigationBar: CustomAppBar(navtype: navBar(),),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(0),

@@ -12,10 +12,20 @@ class MyProfile extends StatefulWidget {
 class _UserState extends State<MyProfile> {
   bool _passwordVisible = true;
 
+  List<BottomNavigationBarItem> navBar() {
+    List<BottomNavigationBarItem> currentNav;
+    if (userDS.getCurrentUsertype() == 'user') {
+      currentNav = userNavBar;
+    } else if (userDS.getCurrentUsertype() == 'admin') {
+      currentNav = adminNavBar;
+    }
+    return currentNav;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomAppBar(),
+      bottomNavigationBar: CustomAppBar(navtype: navBar(),),
       appBar: AppBar(
         title: Text(
           'My Profile',

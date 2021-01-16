@@ -2,6 +2,8 @@ import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'home.dart';
+
 class MySetting extends StatefulWidget {
   static Route<dynamic> route() =>
       MaterialPageRoute(builder: (_) => MySetting());
@@ -10,10 +12,25 @@ class MySetting extends StatefulWidget {
 }
 
 class SettingPage extends State<MySetting> {
+<<<<<<< Updated upstream
+=======
+  String valueChoose;
+  List listTheme = ["Blue Theme", "Red Theme"];
+
+   List<BottomNavigationBarItem> navBar() {
+    List<BottomNavigationBarItem> currentNav;
+    if (userDS.getCurrentUsertype() == 'user') {
+      currentNav = userNavBar;
+    } else if (userDS.getCurrentUsertype() == 'admin') {
+      currentNav = adminNavBar;
+    }
+    return currentNav;
+  }
+>>>>>>> Stashed changes
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomAppBar(),
+      bottomNavigationBar: CustomAppBar(navtype: navBar(),),
       appBar: AppBar(
         backgroundColor: Colors.orangeAccent,
         title: Text(

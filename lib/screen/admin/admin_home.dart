@@ -15,7 +15,7 @@ class AdminHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomAppBar(),
+      bottomNavigationBar: CustomAppBar(navtype: adminNavBar,),
       body: Column(
         children: <Widget>[
           HomeTopScreen(username: 'AdminUser',headerWords: 'Welcome, Admin',),

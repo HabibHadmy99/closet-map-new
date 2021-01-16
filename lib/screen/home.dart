@@ -12,8 +12,19 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< Updated upstream
       body: Column(children: <Widget>[HomeTopScreen(username: 'Habib Hadmy',headerWords: 'Let\'s Start \nShopping !!',)]),
       bottomNavigationBar: CustomAppBar(),
+=======
+      body: Column(children: <Widget>[
+        HomeTopScreen(
+          username: '${user.name}',
+          headerWords: 'Let\'s Start \nShopping !!',
+        ),
+        HomeBottomScreen()
+      ]),
+      bottomNavigationBar: CustomAppBar(navtype: userNavBar,),
+>>>>>>> Stashed changes
     );
   }
 }
