@@ -39,7 +39,7 @@ class AdminHomeScreen extends StatelessWidget {
   Scaffold _buildAdminHome(){
     
     return Scaffold(
-      bottomNavigationBar: CustomAppBar(),
+      bottomNavigationBar: CustomAppBar(navtype: adminNavBar,),
       body: Column(
         children: <Widget>[
           HomeTopScreen(username: user.name ,headerWords: 'Welcome, \n'+ user.name,),

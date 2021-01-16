@@ -23,6 +23,16 @@ class MyProfile extends StatefulWidget {
 }
 
 class _UserState extends State<MyProfile> {
+  final UserDataService userDS = service();
+List<BottomNavigationBarItem> navBar() {
+    List<BottomNavigationBarItem> currentNav;
+    if (userDS.getCurrentUsertype() == 'user') {
+      currentNav = userNavBar;
+    } else if (userDS.getCurrentUsertype() == 'admin') {
+      currentNav = adminNavBar;
+    }
+    return currentNav;
+  }
   //User user;
   bool _passwordVisible = true;
 
@@ -50,7 +60,7 @@ class _UserState extends State<MyProfile> {
     //final ModeNotifier = Provider.of<ValueNotifier<bool>>(context);
 
     return Scaffold(
-      bottomNavigationBar: CustomAppBar(),
+      bottomNavigationBar: CustomAppBar(navtype: navBar(),),
       appBar: AppBar(
         title: Text(
           'My Profile',

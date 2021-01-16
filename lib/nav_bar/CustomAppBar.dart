@@ -10,8 +10,46 @@ import 'package:flutter/material.dart';
 import '../dependencies.dart';
 
 final UserDataService userDS = service();
+const List<BottomNavigationBarItem> userNavBar = [
+  BottomNavigationBarItem(
+    icon: Icon(Icons.home),
+    label: 'Home',
+  ),
+  BottomNavigationBarItem(
+    icon: Icon(Icons.shop_two),
+    label: 'Shop',
+  ),
+  BottomNavigationBarItem(
+    icon: Icon(Icons.add_shopping_cart),
+    label: 'Cart',
+  ),
+  BottomNavigationBarItem(
+    icon: Icon(Icons.switch_account),
+    label: 'Account',
+  ),
+];
+
+List<BottomNavigationBarItem> adminNavBar = [
+  BottomNavigationBarItem(
+    icon: Icon(Icons.home),
+    label: 'Home',
+  ),
+  BottomNavigationBarItem(
+    icon: Icon(Icons.shop_two),
+    label: 'Shop',
+  ),
+  BottomNavigationBarItem(
+    icon: Icon(Icons.switch_account),
+    label: 'Account',
+  ),
+
+];
 
 class CustomAppBar extends StatelessWidget {
+  final navtype;
+
+  CustomAppBar({this.navtype = userNavBar});
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -22,24 +60,8 @@ class CustomAppBar extends StatelessWidget {
           iconSize: 25,
           selectedFontSize: 15,
           unselectedFontSize: 10,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shop_two),
-              label: 'Shop',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.add_shopping_cart),
-              label: 'Cart',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.switch_account),
-              label: 'Account',
-            ),
-          ],
+         items: navtype,
+          
           selectedItemColor: Colors.deepOrangeAccent[400],
           onTap: (_onItemTapped) async {
             final User user = await userDS.getCurrentUser();
@@ -52,7 +74,7 @@ class CustomAppBar extends StatelessWidget {
               }
             } else if (_onItemTapped == 1) {
               Navigator.pushReplacement(context, ShopScreen.route());
-            } else if (_onItemTapped == 2) {
+            } else if (_onItemTapped == 2 && (user.type == 'user')) {
               Navigator.pushReplacement(context, CartScreen.route());
             } else {
               Navigator.pushReplacement(context, Account.route(user));

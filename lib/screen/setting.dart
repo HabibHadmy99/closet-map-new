@@ -1,5 +1,8 @@
+import 'package:closet_map/Services/user_data_service.dart';
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:flutter/material.dart';
+
+import '../dependencies.dart';
 
 class MySetting extends StatefulWidget {
   static Route<dynamic> route() =>
@@ -9,12 +12,22 @@ class MySetting extends StatefulWidget {
 }
 
 class SettingPage extends State<MySetting> {
+  final UserDataService userDS = service();
+List<BottomNavigationBarItem> navBar() {
+    List<BottomNavigationBarItem> currentNav;
+    if (userDS.getCurrentUsertype() == 'user') {
+      currentNav = userNavBar;
+    } else if (userDS.getCurrentUsertype() == 'admin') {
+      currentNav = adminNavBar;
+    }
+    return currentNav;
+  }
   String valueChoose;
   List listTheme = ["Blue Theme", "Red Theme"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomAppBar(),
+      bottomNavigationBar: CustomAppBar(navtype: navBar()),
       appBar: AppBar(
         backgroundColor: Colors.orangeAccent,
         title: Text(

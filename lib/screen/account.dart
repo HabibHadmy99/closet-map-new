@@ -1,9 +1,12 @@
+import 'package:closet_map/Services/user_data_service.dart';
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:closet_map/screen/my_order.dart';
 import 'package:closet_map/screen/profile.dart';
 import 'package:closet_map/screen/setting.dart';
 import 'package:closet_map/shape_clipper/profile_clipper.dart';
 import 'package:flutter/material.dart';
+
+import '../dependencies.dart';
 
 class Account extends StatefulWidget {
   static Route<dynamic> route(current) {
@@ -16,11 +19,21 @@ class Account extends StatefulWidget {
 }
 
 class _ProfileState extends State<Account> {
+  final UserDataService userDS = service();
+List<BottomNavigationBarItem> navBar() {
+    List<BottomNavigationBarItem> currentNav;
+    if (userDS.getCurrentUsertype() == 'user') {
+      currentNav = userNavBar;
+    } else if (userDS.getCurrentUsertype() == 'admin') {
+      currentNav = adminNavBar;
+    }
+    return currentNav;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //backgroundColor: Colors.indigo[900],
-      bottomNavigationBar: CustomAppBar(),
+      bottomNavigationBar: CustomAppBar(navtype: navBar()),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[

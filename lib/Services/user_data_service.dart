@@ -21,4 +21,5 @@ abstract class UserDataService {
     String password,
   });
   Future<List<User>> getUserList();
+  String getCurrentUsertype();
 }

@@ -1,6 +1,7 @@
 import 'package:closet_map/List/list.dart';
 import 'package:closet_map/Models/item_model.dart';
 import 'package:closet_map/Services/items_service.dart';
+import 'package:closet_map/Services/user_data_service.dart';
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,16 @@ class ShopScreen extends StatefulWidget {
 
 class _ShopScreenState extends State<ShopScreen> {
   List<Items> _items;
+  final UserDataService userDS = service();
+List<BottomNavigationBarItem> navBar() {
+    List<BottomNavigationBarItem> currentNav;
+    if (userDS.getCurrentUsertype() == 'user') {
+      currentNav = userNavBar;
+    } else if (userDS.getCurrentUsertype() == 'admin') {
+      currentNav = adminNavBar;
+    }
+    return currentNav;
+  }
   @override
   Widget build(BuildContext context) {
     final ItemsDataServiceMock todoDataService = service();
@@ -37,7 +48,7 @@ class _ShopScreenState extends State<ShopScreen> {
         title: new Center(child: new Text("SHOP", textAlign: TextAlign.center)),
       ),
       backgroundColor: Colors.white,
-      bottomNavigationBar: CustomAppBar(),
+      bottomNavigationBar: CustomAppBar(navtype: navBar(),),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(20),
