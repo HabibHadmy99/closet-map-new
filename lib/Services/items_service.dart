@@ -1,5 +1,6 @@
 import 'package:closet_map/Models/item_model.dart';
 
+import 'dataservice.dart';
 import 'items_dataservice.dart';
 
 final _itemlistDatabase = <Items>[
@@ -35,7 +36,11 @@ final _itemlistDatabase = <Items>[
 class ItemsDataServiceMock implements ItemsDataService {
   //get item list
   Future<List<Items>> getItemsList() async {
-    return [..._itemlistDatabase];
+    final listJson = await dataService.get('itemlist');
+
+        return (listJson as List)
+        .map((itemJson) => Items.fromJson(itemJson))
+        .toList();
   }
 
   //update items

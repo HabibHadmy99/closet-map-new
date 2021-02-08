@@ -1,0 +1,38 @@
+@baseUrl = http://192.168.0.127:3000
+
+
+GET {{baseUrl}}/itemlist
+
+###  Getting a todo of given id
+GET {{baseUrl}}/itemlist/1
+
+### Update the status of a given todo (whether is completed or not)
+PATCH {{baseUrl}}/itemlist/1
+Content-Type: application/json
+
+{
+     "price": 100.05
+}
+
+### Update the status of a given todo (whether is completed or not)
+PATCH {{baseUrl}}/itemlist/2
+Content-Type: application/json
+
+{
+     "price": 100.05
+}
+
+### Update the status of a given todo (whether is completed or not)
+PATCH {{baseUrl}}/itemlist/3
+Content-Type: application/json
+
+{
+     "price": 120.05
+}
+
+
+
+
+
+
+
