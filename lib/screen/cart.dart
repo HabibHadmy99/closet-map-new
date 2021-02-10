@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import '../dependencies.dart';
 import 'Checkout.dart';
 
+List<Items> order;
+
 class CartScreen extends StatefulWidget {
   static String routeName = "/cart";
   static Route<dynamic> route() =>
@@ -16,7 +18,6 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  List<Items> order;
   @override
   Widget build(BuildContext context) {
     final OrderDataServiceMock orderDataService = service();
@@ -28,7 +29,7 @@ class _CartScreenState extends State<CartScreen> {
             order = snapshot.data;
             return buildCart(context);
           }
-          return _buildFetchingDataScreen();
+          return buildCart(context);
         });
   }
 

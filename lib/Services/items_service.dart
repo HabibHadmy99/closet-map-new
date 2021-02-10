@@ -1,11 +1,14 @@
+import 'dart:convert';
+
 import 'package:closet_map/Models/item_model.dart';
+import 'package:http/http.dart';
 
 import 'dataservice.dart';
 import 'items_dataservice.dart';
 
 final _itemlistDatabase = <Items>[
   Items(
-    id: 1,
+    id: "1",
     name: 'Polo v1',
     brand: 'Polo Ralph',
     image: 'assets/images/four.jpg',
@@ -14,7 +17,7 @@ final _itemlistDatabase = <Items>[
     desc: 'This is item description for Polo v1',
   ),
   Items(
-    id: 2,
+    id: "2",
     name: 'Swagor',
     brand: 'Levis',
     image: 'assets/images/two.jpg',
@@ -23,7 +26,7 @@ final _itemlistDatabase = <Items>[
     desc: 'This is item description for Swagor',
   ),
   Items(
-    id: 3,
+    id: "3",
     name: 'Munchik',
     brand: 'Guess',
     image: 'assets/images/three.jpg',
@@ -36,17 +39,19 @@ final _itemlistDatabase = <Items>[
 class ItemsDataServiceMock implements ItemsDataService {
   //get item list
   Future<List<Items>> getItemsList() async {
-    final listJson = await dataService.get('itemlist');
-
-        return (listJson as List)
+    final listJson = await dataService.get('item');
+    return (listJson as List)
         .map((itemJson) => Items.fromJson(itemJson))
         .toList();
   }
 
   //update items
   Future<Items> updateItemsName(
-      {int id, String name, String brand, String desc}) async {
-    final matchedItems = _itemlistDatabase
+      {String id, String name, String brand, String desc}) async {
+    final json = await dataService
+        .patch('item/$id', data: {'name': name, 'brand': brand, 'decs': desc});
+    return Items.fromJson(json);
+    /*final matchedItems = _itemlistDatabase
         .firstWhere((item) => item.id == id); //checkmatching item
 
     if (name.length != 0) {
@@ -57,7 +62,7 @@ class ItemsDataServiceMock implements ItemsDataService {
     }
     if (desc.length != 0) {
       matchedItems.desc = desc;
-    }
+    }*/
 
     /*matchedItems.name = name;
     matchedItems.brand = brand;
@@ -67,7 +72,7 @@ class ItemsDataServiceMock implements ItemsDataService {
     }else if (price != 0) {
       matchedItems.price = price;
     }*/
-    return matchedItems;
+    //return matchedItems;
   }
 
   //update desc
@@ -86,7 +91,7 @@ class ItemsDataServiceMock implements ItemsDataService {
   }
 */
   //delete item
-  Future deleteItems({int id}) async {
-    _itemlistDatabase.removeWhere((item) => item.id == id);
+  Future<Items> deleteItems({String id}) async {
+    await dataService.delete('order/$id');
   }
 }

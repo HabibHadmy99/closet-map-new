@@ -1,37 +1,42 @@
-@baseUrl = http://192.168.0.127:3000
+@baseUrl = https://us-central1-closet-map-backend.cloudfunctions.net/api
 
-
-GET {{baseUrl}}/itemlist
+GET {{baseUrl}}/user
 
 ###  Getting a todo of given id
-GET {{baseUrl}}/itemlist/1
+GET {{baseUrl}}/item
 
-### Update the status of a given todo (whether is completed or not)
-PATCH {{baseUrl}}/itemlist/1
+###  Getting a todo of given id
+GET {{baseUrl}}/order
+
+### Add new item
+POST {{baseUrl}}/item HTTP/1.1
 Content-Type: application/json
 
 {
-     "price": 100.05
+     "name": "CK shirt",
+     "brand": "Calvin Klein",
+     "image": "assets/images/four.jpg",
+     "quantity": 6,
+     "price": 100.49,
+     "desc": "This is item description for Polo v1",
+     "id": 4
 }
 
 ### Update the status of a given todo (whether is completed or not)
-PATCH {{baseUrl}}/itemlist/2
+PATCH {{baseUrl}}/user/ZICXkHsPTy4ZeGQgg8Fm
 Content-Type: application/json
 
 {
-     "price": 100.05
+     "name": "Jasmin"
 }
 
 ### Update the status of a given todo (whether is completed or not)
-PATCH {{baseUrl}}/itemlist/3
+PATCH {{baseUrl}}/item/3
 Content-Type: application/json
 
 {
      "price": 120.05
 }
-
-
-
 
 
 

@@ -12,6 +12,5 @@ void init() {
   service.registerLazySingleton(() => OrderDataServiceMock());
   service.registerLazySingleton(() => ItemsDataServiceMock());
   service.registerLazySingleton<UserDataService>(() => UserDataServiceMock());
-
   service.registerLazySingleton(() => ItemlistViewmodel());
 }

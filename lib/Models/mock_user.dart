@@ -1,3 +1,4 @@
+import 'package:closet_map/Services/dataservice.dart';
 import 'package:closet_map/Services/user_data_service.dart';
 
 import '../List/user.dart';
@@ -55,21 +56,26 @@ class UserDataServiceMock implements UserDataService {
         address: address,
         password: password,
         type: type);
-    globalUserList.add(newUser);
+
+    final json = await dataService.post('user', data: newUser);
+    return User.fromJson(json);
   }
 
   Future<User> getCurrentUser() async {
     return current;
   }
-String getCurrentUsertype() {
+
+  String getCurrentUsertype() {
     return current.type;
   }
+
   Future updateUser({
     String name,
     String email,
     String contact,
     String address,
     String password,
+    String id,
   }) async {
     if (name == null) {
       name = current.name;
@@ -86,26 +92,39 @@ String getCurrentUsertype() {
     if (password == null) {
       password = current.password;
     }
+    final json = await dataService.patch('user/$id', data: {
+      'name': name,
+      'email': email,
+      'contact': contact,
+      'address': address,
+      'password': password
+    });
+    return User.fromJson(json);
 
-    current.name = name;
+    /*current.name = name;
     current.contact = contact;
     current.email = email;
     current.address = address;
-    current.password = password;
+    current.password = password;*/
   }
 
   Future<List<User>> getUserList() async {
-    List<User> user = new List<User>();
+    final listJson = await dataService.get('user');
+    return (listJson as List)
+        .map((itemJson) => User.fromJson(itemJson))
+        .toList();
+    /* List<User> user = new List<User>();
     print(globalUserList.length);
 
     for (int i = 0; i < globalUserList.length; i++)
       if (globalUserList[i].type == 'user') user.add(globalUserList[i]);
 
-    return user;
+    return user;*/
   }
 
   Future<User> signin(String email, String password) async {
-    for (var user in globalUserList) {
+    List<User> userlist = await getUserList();
+    for (var user in userlist) {
       if (email == user.email && password == user.password) {
         current = user;
         return Future.value(user);

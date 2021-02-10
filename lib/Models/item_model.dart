@@ -7,7 +7,7 @@ class Items {
   double price;
   String desc;
   String name;
-  int id;
+  String id;
 
   Items(
       {this.name,
@@ -20,7 +20,7 @@ class Items {
 
   Items.fromJson(Map<String, dynamic> json)
       : this(
-            id: json['id'],
+            id: json['id'].toString(),
             name: json['name'],
             brand: json['brand'],
             image: json['image'],
@@ -28,12 +28,12 @@ class Items {
             price: json['price'],
             desc: json['desc']);
   Map<String, dynamic> toJson() => {
-    'id': id, 
-    'name': name, 
-    'brand': brand,
-    'image': image,
-    'quantity': quantity,
-    'price': price,
-    'desc': desc
-    };
+        'id': id,
+        'name': name,
+        'brand': brand,
+        'image': image,
+        'quantity': quantity,
+        'price': price,
+        'desc': desc
+      };
 }

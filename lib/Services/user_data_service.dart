@@ -13,13 +13,13 @@ abstract class UserDataService {
   });
 
   Future<User> getCurrentUser();
-  Future updateUser({
-    String name,
-    String email,
-    String contact,
-    String address,
-    String password,
-  });
+  Future updateUser(
+      {String name,
+      String email,
+      String contact,
+      String address,
+      String password,
+      String id});
   Future<List<User>> getUserList();
   String getCurrentUsertype();
 }
