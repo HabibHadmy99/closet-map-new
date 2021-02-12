@@ -65,6 +65,10 @@ class UserDataServiceMock implements UserDataService {
     return current;
   }
 
+  Future setCurrentUser({User curr}) async {
+    current = curr;
+  }
+
   String getCurrentUsertype() {
     return current.type;
   }

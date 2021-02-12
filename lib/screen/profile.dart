@@ -231,15 +231,17 @@ class _UserState extends State<MyProfile> {
             ),
             FlatButton(
               color: Colors.orangeAccent,
-              onPressed: () {
+              onPressed: () async {
                 UserDataService userDataService = service();
-                userDataService.updateUser(
+                final curruser = await userDataService.updateUser(
                     name: name,
                     email: email,
                     contact: contact,
                     address: address,
                     password: password,
                     id: user.id);
+                userDataService.setCurrentUser(curr: curruser);
+                Navigator.pushReplacement(context, MyProfile.route(user));
               },
               child: Text('Save'),
             )
