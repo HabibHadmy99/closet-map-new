@@ -3,10 +3,12 @@ import 'package:closet_map/Models/item_model.dart';
 import 'package:closet_map/Services/items_service.dart';
 import 'package:closet_map/Services/user_data_service.dart';
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
+import 'package:closet_map/screen/view.dart';
 import 'package:flutter/material.dart';
 
 import '../dependencies.dart';
 import 'item_detail.dart';
+import 'itemlist_viewmodel.dart';
 
 class ShopScreen extends StatefulWidget {
   static Route<dynamic> route() =>
@@ -17,7 +19,7 @@ class ShopScreen extends StatefulWidget {
 class _ShopScreenState extends State<ShopScreen> {
   List<Items> _items;
   final UserDataService userDS = service();
-List<BottomNavigationBarItem> navBar() {
+  List<BottomNavigationBarItem> navBar() {
     List<BottomNavigationBarItem> currentNav;
     if (userDS.getCurrentUsertype() == 'user') {
       currentNav = userNavBar;
@@ -26,29 +28,20 @@ List<BottomNavigationBarItem> navBar() {
     }
     return currentNav;
   }
+
   @override
-  Widget build(BuildContext context) {
-    final ItemsDataServiceMock todoDataService = service();
 
-    return FutureBuilder<List<Items>>(
-        future: todoDataService.getItemsList(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            _items = snapshot.data;
-            return _buildShopScreen();
-          }
-          return _buildFetchingDataScreen();
-        });
-  }
 
-  Scaffold _buildShopScreen() {
+  Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orangeAccent,
         title: new Center(child: new Text("SHOP", textAlign: TextAlign.center)),
       ),
       backgroundColor: Colors.white,
-      bottomNavigationBar: CustomAppBar(navtype: navBar(),),
+      bottomNavigationBar: CustomAppBar(
+        navtype: navBar(),
+      ),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(20),
@@ -82,23 +75,38 @@ List<BottomNavigationBarItem> navBar() {
               ),
               Container(
                   height: 550.0,
-                  child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      itemCount: _items.length,
-                      itemBuilder: (context, index) {
-                        final _item = _items[index];
-                        return Container(
-                          child: MakeItem(
-                            brand: _item.brand,
-                            image: _item.image,
-                            context: context,
-                            names: _item.name,
-                            price: _item.price,
-                            index: index,
-                            items: _item,
-                          ),
-                        );
-                      }))
+                  child: View<ItemlistViewmodel>(
+                      initViewmodel: (itemlistViewmodel)=> itemlistViewmodel.getList(),
+                      builder: (context, itemlistViewmodel, __) {
+                        final items = itemlistViewmodel.items;
+
+                           if (items == null) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                          );
+                          }
+                        itemlistViewmodel.getList();
+                        
+                        return ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            itemCount: items.length,
+                            itemBuilder: (context, index) {
+                              final _item = items[index];
+                              return Container(
+                                child: MakeItem(
+                                  brand: _item.brand,
+                                  image: _item.image,
+                                  context: context,
+                                  names: _item.name,
+                                  price: _item.price,
+                                  index: index,
+                                  items: _item ,
+                                ),
+                              );
+                            });
+                      })
+                      
+                      )
             ],
           ),
         ),
@@ -106,20 +114,7 @@ List<BottomNavigationBarItem> navBar() {
     );
   }
 
-  Scaffold _buildFetchingDataScreen() {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            CircularProgressIndicator(),
-            SizedBox(height: 50),
-            Text('Loading items...'),
-          ],
-        ),
-      ),
-    );
-  }
+
 }
 
 class Categories extends StatelessWidget {
@@ -161,7 +156,6 @@ class MakeItem extends StatelessWidget {
   final index;
   final items;
   @override
-  
   Widget build(BuildContext context) {
     return Hero(
       tag: brand,

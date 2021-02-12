@@ -44,12 +44,18 @@ class AdminHomeScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: SelectorView<ItemlistViewmodel, int>(
-            selector: (_, itemlistViewmodel) =>
-                itemlistViewmodel.busy ? 0 : itemlistViewmodel.items.length,
-            builder: (context, itemlistViewmodel, __) {
-              itemlistViewmodel.getList();
+            child: View<ItemlistViewmodel>(
+                  initViewmodel: (itemlistViewmodel)=> itemlistViewmodel.getList(),
+                  builder: (context, itemlistViewmodel, __) {
+
               final items = itemlistViewmodel.items;
+
+              if (items == null) {
+                  return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                      }
+              itemlistViewmodel.getList();
               return ListView.builder(
                 itemCount: items.length,
                 itemBuilder: (context, index) {
