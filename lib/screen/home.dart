@@ -150,7 +150,8 @@ class HomeBottomScreen extends StatefulWidget {
 class HomeBottomScreenState extends State<HomeBottomScreen> {
   @override
 
-  Widget build(BuildContext context) {
+
+  Widget build(BuildContext context)  {
     return Column(
       children: <Widget>[
         Padding(
@@ -172,10 +173,11 @@ class HomeBottomScreenState extends State<HomeBottomScreen> {
           ),
         ),
         SingleChildScrollView(
-            child: Container(
+            child: 
+            
+            Container(
                 height: 375.0,
-                child: 
-                View<ItemlistViewmodel>(
+                child: View<ItemlistViewmodel>(
                       initViewmodel: (itemlistViewmodel)=> itemlistViewmodel.getList(),
                       builder: (context, itemlistViewmodel, __) {
                         final items = itemlistViewmodel.items;
@@ -186,27 +188,25 @@ class HomeBottomScreenState extends State<HomeBottomScreen> {
                           );
                           }
                         itemlistViewmodel.getList();
-                        
                         return ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            itemCount: items.length,
-                            itemBuilder: (context, index) {
-                              final _item = items[index];
-                              return Container(
-                                child: MakeItem(
-                                  brand: _item.brand,
-                                  image: _item.image,
-                                  context: context,
-                                  names: _item.name,
-                                  price: _item.price,
-                                  index: index,
-                                  items: items,
-                                ),
-                              );
-                            });
-                      })
-                    
-            )
+                    scrollDirection: Axis.vertical,
+                    itemCount: _items.length,
+                    itemBuilder: (context, index) {
+                      final _item = _items[index];
+                      return Container(
+                        child: MakeItem(
+                          brand: _item.brand,
+                          image: _item.image,
+                          context: context,
+                          names: _item.name,
+                          price: _item.price,
+                          index: index,
+                          items: _item,
+                        ),
+                      );
+                    });
+  }
+                    )
             /*
         Container(
           height: 180.0,
@@ -357,7 +357,7 @@ class HomeBottomScreenState extends State<HomeBottomScreen> {
         ),
       */
             )
-      ],
+        )],
     );
   }
 
