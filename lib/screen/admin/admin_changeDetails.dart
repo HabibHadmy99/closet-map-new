@@ -17,16 +17,21 @@ class ItemChangeForm extends StatefulWidget {
 
 class _ItemChangeForm extends State<ItemChangeForm> {
   final ItemsDataServiceMock todoDataService = service();
-  final nameController = TextEditingController();
-  final brandController = TextEditingController();
-  final descController = TextEditingController();
-  final quantityController = TextEditingController();
-  final priceController = TextEditingController();
+  var nameController = TextEditingController();
+  var brandController = TextEditingController();
+  var descController = TextEditingController();
+  var quantityController = TextEditingController();
+  var priceController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    nameController.text = widget.itemsList.name;
+    brandController.text = widget.itemsList.brand;
+    descController.text = widget.itemsList.desc;
     return Scaffold(
-      bottomNavigationBar: CustomAppBar(navtype: adminNavBar,),
+      bottomNavigationBar: CustomAppBar(
+        navtype: adminNavBar,
+      ),
       appBar: AppBar(
         title: Text(
           widget.itemsList.name,
@@ -133,14 +138,12 @@ class TextField extends StatelessWidget {
       height: 80,
       width: 350,
       child: TextFormField(
-        
         keyboardType: type,
         controller: cont,
         cursorColor: Theme.of(context).cursorColor,
         initialValue: initVal,
         maxLength: max,
         decoration: InputDecoration(
-      
           hintText: hint,
           labelText: label,
           labelStyle: TextStyle(
