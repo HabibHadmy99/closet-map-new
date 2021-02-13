@@ -12,6 +12,7 @@ GetIt service = GetIt.instance;
 
 void init() {
   service.registerLazySingleton<OrderDataService>(() => OrderDataServiceMock());
+   service.registerLazySingleton(() => OrderDataServiceMock());
   service.registerLazySingleton(() => ItemsDataServiceMock());
   service.registerLazySingleton<UserDataService>(() => UserDataServiceMock());
   service.registerLazySingleton(() => ItemlistViewmodel());

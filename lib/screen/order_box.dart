@@ -1,10 +1,12 @@
 import 'package:closet_map/Models/item_model.dart';
 import 'package:closet_map/Services/OrderService/order_data_service_mock.dart';
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
+import 'package:closet_map/screen/view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../dependencies.dart';
+import 'orderlist_viewmodel.dart';
 
 class OrderBox extends StatefulWidget {
   @override
@@ -16,17 +18,18 @@ class _OrderBoxState extends State<OrderBox> {
 
   @override
   Widget build(BuildContext content) {
-    final OrderDataServiceMock orderDataService = service();
+    //final OrderDataServiceMock orderDataService = service();
 
-    return FutureBuilder<List<Items>>(
-        future: orderDataService.getOrderList(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            order = snapshot.data;
-            return _buildMainScreen();
-          }
+    return View<OrderlistViewmodel>(
+      initViewmodel: (ordermodel) => ordermodel.getList(),
+      builder: (context, ordermodel, _) {
+        if (ordermodel.busy) {
           return _buildFetchingDataScreen();
-        });
+        }
+        order = ordermodel.orders;
+        return _buildMainScreen();
+      },
+    );
   }
 
   Scaffold _buildMainScreen() {
