@@ -7,13 +7,12 @@ import 'order_data_service.dart';
 
 class OrderDataServiceMock implements OrderDataService {
   Future<List<Items>> getOrderList({String userID}) async {
-    print('eee');
     var list = <Items>[];
     final listJson = await dataService.get('order');
     if (listJson != null) {
       list = (listJson as List).map((list) => Items.fromJson(list)).toList();
     }
-    print(list);
+  
     final matched = list.where((item) => item.userID == userID).toList();
     return matched;
   }

@@ -21,7 +21,7 @@ class ItemsDataServiceMock implements ItemsDataService {
   Future<Items> updateItemsName(
       {String id, String name, String brand, String desc}) async {
     final json = await dataService
-        .patch('item/$id', data: {'name': name, 'brand': brand, 'decs': desc});
+        .patch('item/$id', data: {'name': name, 'brand': brand, 'desc': desc});
     return Items.fromJson(json);
   }
 
