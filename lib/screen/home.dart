@@ -4,7 +4,6 @@ import 'package:closet_map/Models/item_model.dart';
 import 'package:closet_map/Services/items_dataservice.dart';
 import 'package:closet_map/Services/items_service.dart';
 import 'package:closet_map/screen/shop.dart';
-import 'package:closet_map/screen/view.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
@@ -12,7 +11,6 @@ import 'package:closet_map/shape_clipper/Shape4HomeTop.dart';
 import 'package:flutter/material.dart';
 import '../dependencies.dart';
 import 'account.dart';
-import 'itemlist_viewmodel.dart';
 import 'signin.dart';
 
 List<String> setupOption = ['User Setting', 'Logout'];
@@ -33,7 +31,7 @@ class Home extends StatelessWidget {
           username: '${user.name}',
           headerWords: 'Let\'s Start \nShopping !!',
         ),
-        HomeBottomScreen(),
+        HomeBottomScreen()
       ]),
       bottomNavigationBar: CustomAppBar(),
     );
@@ -150,6 +148,20 @@ class HomeBottomScreen extends StatefulWidget {
 class HomeBottomScreenState extends State<HomeBottomScreen> {
   @override
   Widget build(BuildContext context) {
+    final ItemsDataServiceMock todoDataService = service();
+
+    return FutureBuilder<List<Items>>(
+        future: todoDataService.getItemsList(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            _items = snapshot.data;
+            return _buildBottomPart();
+          }
+          return _buildFetchingDataScreen();
+        });
+  }
+
+  Widget _buildBottomPart() {
     return Column(
       children: <Widget>[
         Padding(
@@ -173,36 +185,22 @@ class HomeBottomScreenState extends State<HomeBottomScreen> {
         SingleChildScrollView(
             child: Container(
                 height: 375.0,
-                child: View<ItemlistViewmodel>(
-                    initViewmodel: (itemlistViewmodel) =>
-                        itemlistViewmodel.getList(),
-                    builder: (context, itemlistViewmodel, __) {
-                      final items = itemlistViewmodel.items;
-
-                      if (items == null) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      itemlistViewmodel.getList();
-
-                      return ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          itemCount: items.length,
-                          itemBuilder: (context, index) {
-                            final _item = items[index];
-                            return Container(
-                              child: MakeItem(
-                                brand: _item.brand,
-                                image: _item.image,
-                                context: context,
-                                names: _item.name,
-                                price: _item.price,
-                                index: index,
-                                items: items,
-                              ),
-                            );
-                          });
+                child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    itemCount: _items.length,
+                    itemBuilder: (context, index) {
+                      final _item = _items[index];
+                      return Container(
+                        child: MakeItem(
+                          brand: _item.brand,
+                          image: _item.image,
+                          context: context,
+                          names: _item.name,
+                          price: _item.price,
+                          index: index,
+                          items: _item,
+                        ),
+                      );
                     }))
             /*
         Container(

@@ -75,6 +75,7 @@ class UserDataServiceMock implements UserDataService {
   }
 
   String getUserID() {
+    //print('userid: ${current.id}');
     return current.id;
   }
 

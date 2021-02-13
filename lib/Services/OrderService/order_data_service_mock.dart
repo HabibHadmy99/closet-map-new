@@ -5,14 +5,15 @@ import 'package:closet_map/Services/dataservice.dart';
 
 import 'order_data_service.dart';
 
-
-
 class OrderDataServiceMock implements OrderDataService {
   Future<List<Items>> getOrderList({String userID}) async {
+    print('eee');
     var list = <Items>[];
     final listJson = await dataService.get('order');
-    if(listJson != null){list =
-        (listJson as List).map((list) => Items.fromJson(list)).toList();}
+    if (listJson != null) {
+      list = (listJson as List).map((list) => Items.fromJson(list)).toList();
+    }
+    print(list);
     final matched = list.where((item) => item.userID == userID).toList();
     return matched;
   }
@@ -23,7 +24,6 @@ class OrderDataServiceMock implements OrderDataService {
     final itemnew = await dataService.get('item/$item_id');
     final json = await dataService.post('order', data: itemnew);
     return Items.fromJson(json);
-
   }
 
   // ignore: missing_return

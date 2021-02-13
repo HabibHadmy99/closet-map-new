@@ -13,10 +13,10 @@ class OrderlistViewmodel extends Viewmodel {
   User _user;
 
   User get user => _user;
-  set user(User user) {
+  /*set user(User user) {
     _user = user;
     getList();
-  }
+  }*/
 
   OrderlistViewmodel();
   OrderDataService get dataservice => service();
