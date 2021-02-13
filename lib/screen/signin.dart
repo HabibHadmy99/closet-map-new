@@ -135,6 +135,7 @@ class _SigninScreenState extends State<SigninScreen> {
           } else if (user.type == 'user') {
             Navigator.pushReplacement(context, Home.route(user));
           }
+          userDS.setCurrentUser(curr: user);
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(

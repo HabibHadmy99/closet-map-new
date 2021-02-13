@@ -13,7 +13,7 @@ abstract class UserDataService {
   });
 
   Future setCurrentUser({User curr});
-
+  String getUserID();
   Future<User> getCurrentUser();
   Future updateUser(
       {String name,

@@ -132,9 +132,9 @@ List<BottomNavigationBarItem> navBar() {
                           onPressed: () {
                             final OrderDataServiceMock orderDataService =
                                 service();
-
+                            final UserDataService userDS = service();
                             orderDataService.updateCartlist(
-                                items: widget.itemsList);
+                                items: widget.itemsList, userID: userDS.getUserID(), item_id: widget.itemsList.id);
 
                             Navigator.pushReplacement(
                                 context, CartScreen.route());

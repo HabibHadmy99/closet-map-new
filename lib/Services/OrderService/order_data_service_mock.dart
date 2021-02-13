@@ -5,53 +5,25 @@ import 'package:closet_map/Services/dataservice.dart';
 
 import 'order_data_service.dart';
 
-final _itemlistDatabase2 = <Items>[
-  Items(
-    id: '1',
-    name: 'Polo v1',
-    brand: 'Polo Ralph',
-    image: 'assets/images/four.jpg',
-    quantity: 6,
-    price: 100,
-    desc: 'This is item description for Polo v1',
-  ),
-  Items(
-    id: '2',
-    name: 'Swagor',
-    brand: 'Levis',
-    image: 'assets/images/two.jpg',
-    quantity: 6,
-    price: 100,
-    desc: 'This is item description for Swagor',
-  ),
-  Items(
-    id: '3',
-    name: 'Munchik',
-    brand: 'Guess',
-    image: 'assets/images/three.jpg',
-    quantity: 6,
-    price: 120,
-    desc: 'This is item description for Munchik',
-  ),
-];
 
-var lsit = <OrderList>[
-  OrderList(userid: 1, order: _itemlistDatabase2),
-];
 
 class OrderDataServiceMock implements OrderDataService {
-  Future<List<Items>> getOrderList() async {
+  Future<List<Items>> getOrderList({String userID}) async {
+    var list = <Items>[];
     final listJson = await dataService.get('order');
-    return (listJson as List)
-        .map((itemJson) => Items.fromJson(itemJson))
-        .toList();
+    if(listJson != null){list =
+        (listJson as List).map((list) => Items.fromJson(list)).toList();}
+    final matched = list.where((item) => item.userID == userID).toList();
+    return matched;
   }
 
-  Future<Items> updateCartlist({Items items}) async {
-    final json = await dataService.post('order', data: items);
+  Future<Items> updateCartlist(
+      {Items items, String item_id, String userID}) async {
+    await dataService.patch('item/$item_id', data: {'userID': userID});
+    final itemnew = await dataService.get('item/$item_id');
+    final json = await dataService.post('order', data: itemnew);
     return Items.fromJson(json);
-    //_itemlistDatabase2.add(items);
-    //return items;
+
   }
 
   // ignore: missing_return

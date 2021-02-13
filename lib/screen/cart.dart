@@ -1,6 +1,7 @@
 import 'package:closet_map/List/list.dart';
 import 'package:closet_map/Models/item_model.dart';
 import 'package:closet_map/Services/OrderService/order_data_service_mock.dart';
+import 'package:closet_map/Services/user_data_service.dart';
 import 'package:closet_map/nav_bar/CustomAppBar.dart';
 import 'package:flutter/material.dart';
 import '../dependencies.dart';
@@ -21,14 +22,15 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     final OrderDataServiceMock orderDataService = service();
-
+    final UserDataService userDS = service();
     return FutureBuilder<List<Items>>(
-        future: orderDataService.getOrderList(),
+        future: orderDataService.getOrderList(userID: userDS.getUserID()),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             order = snapshot.data;
             return buildCart(context);
           }
+          order = [];
           return buildCart(context);
         });
   }

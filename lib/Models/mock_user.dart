@@ -73,6 +73,10 @@ class UserDataServiceMock implements UserDataService {
     return current.type;
   }
 
+  String getUserID() {
+    return current.id;
+  }
+
   Future updateUser({
     String name,
     String email,

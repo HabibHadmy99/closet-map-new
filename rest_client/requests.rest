@@ -1,4 +1,4 @@
-@baseUrl = https://us-central1-closet-map-backend.cloudfunctions.net/api
+@baseUrl = http://192.168.0.128:3001
 
 GET {{baseUrl}}/user
 
@@ -22,6 +22,22 @@ Content-Type: application/json
      "id": 4
 }
 
+### Add new item
+POST {{baseUrl}}/order HTTP/1.1
+Content-Type: application/json
+
+{
+      "id": 2,
+      "name": "Swagor",
+      "brand": "Levis",
+      "image": "assets/images/two.jpg",
+      "quantity": 6,
+      "price": 100.05,
+      "desc": "This is item description for Swagor",
+      "userid": "OK5T1DrQu02i8tbgngx3",
+      "userID": "OK5T1DrQu02i8tbgngx3"
+}
+
 ### Update the status of a given todo (whether is completed or not)
 PATCH {{baseUrl}}/user/ZICXkHsPTy4ZeGQgg8Fm
 Content-Type: application/json
@@ -37,6 +53,15 @@ Content-Type: application/json
 {
      "price": 120.05
 }
+
+### Update the status of a given todo (whether is completed or not)
+PATCH {{baseUrl}}/item/1
+Content-Type: application/json
+
+{
+     "userID": "OK5T1DrQu02i8tbgngx3"
+}
+
 
 
 
