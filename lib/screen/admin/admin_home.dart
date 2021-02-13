@@ -15,16 +15,13 @@ import 'admin_changeDetails.dart';
 User user;
 
 class AdminHomeScreen extends StatelessWidget {
- 
   static Route<dynamic> route(current) {
     user = current;
     return MaterialPageRoute(builder: (_) => AdminHomeScreen());
   }
 
   @override
-
-
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CustomAppBar(
         navtype: adminNavBar,
@@ -44,17 +41,16 @@ class AdminHomeScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: View<ItemlistViewmodel>(
-                  initViewmodel: (itemlistViewmodel)=> itemlistViewmodel.getList(),
-                  builder: (context, itemlistViewmodel, __) {
-
+              child: View<ItemlistViewmodel>(
+            initViewmodel: (itemlistViewmodel) => itemlistViewmodel.getList(),
+            builder: (context, itemlistViewmodel, __) {
               final items = itemlistViewmodel.items;
 
               if (items == null) {
-                  return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                      }
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
               itemlistViewmodel.getList();
               return ListView.builder(
                 itemCount: items.length,
@@ -99,6 +95,5 @@ class AdminHomeScreen extends StatelessWidget {
       ), */
     );
   }
-
 }
 /*, */

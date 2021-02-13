@@ -33,7 +33,7 @@ class Home extends StatelessWidget {
           username: '${user.name}',
           headerWords: 'Let\'s Start \nShopping !!',
         ),
-        HomeBottomScreen()
+        HomeBottomScreen(),
       ]),
       bottomNavigationBar: CustomAppBar(),
     );
@@ -149,9 +149,7 @@ class HomeBottomScreen extends StatefulWidget {
 
 class HomeBottomScreenState extends State<HomeBottomScreen> {
   @override
-
-
-  Widget build(BuildContext context)  {
+  Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         Padding(
@@ -173,40 +171,39 @@ class HomeBottomScreenState extends State<HomeBottomScreen> {
           ),
         ),
         SingleChildScrollView(
-            child: 
-            
-            Container(
+            child: Container(
                 height: 375.0,
                 child: View<ItemlistViewmodel>(
-                      initViewmodel: (itemlistViewmodel)=> itemlistViewmodel.getList(),
-                      builder: (context, itemlistViewmodel, __) {
-                        final items = itemlistViewmodel.items;
+                    initViewmodel: (itemlistViewmodel) =>
+                        itemlistViewmodel.getList(),
+                    builder: (context, itemlistViewmodel, __) {
+                      final items = itemlistViewmodel.items;
 
-                           if (items == null) {
-                            return Center(
-                              child: CircularProgressIndicator(),
-                          );
-                          }
-                        itemlistViewmodel.getList();
-                        return ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: _items.length,
-                    itemBuilder: (context, index) {
-                      final _item = _items[index];
-                      return Container(
-                        child: MakeItem(
-                          brand: _item.brand,
-                          image: _item.image,
-                          context: context,
-                          names: _item.name,
-                          price: _item.price,
-                          index: index,
-                          items: _item,
-                        ),
-                      );
-                    });
-  }
-                    )
+                      if (items == null) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      itemlistViewmodel.getList();
+
+                      return ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          itemCount: items.length,
+                          itemBuilder: (context, index) {
+                            final _item = items[index];
+                            return Container(
+                              child: MakeItem(
+                                brand: _item.brand,
+                                image: _item.image,
+                                context: context,
+                                names: _item.name,
+                                price: _item.price,
+                                index: index,
+                                items: items,
+                              ),
+                            );
+                          });
+                    }))
             /*
         Container(
           height: 180.0,
@@ -357,7 +354,7 @@ class HomeBottomScreenState extends State<HomeBottomScreen> {
         ),
       */
             )
-        )],
+      ],
     );
   }
 

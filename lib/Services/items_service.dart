@@ -1,8 +1,12 @@
+import 'dart:convert';
 
 import 'package:closet_map/Models/item_model.dart';
+import 'package:http/http.dart';
+
 import 'dataservice.dart';
 import 'items_dataservice.dart';
 
+Items item;
 
 class ItemsDataServiceMock implements ItemsDataService {
   //get item list
@@ -16,13 +20,11 @@ class ItemsDataServiceMock implements ItemsDataService {
   //update items
   Future<Items> updateItemsName(
       {String id, String name, String brand, String desc}) async {
-
-    final json = await dataService.patch('item/$id', data: {'name': name, 'brand': brand, 'desc': desc});
+    final json = await dataService
+        .patch('item/$id', data: {'name': name, 'brand': brand, 'decs': desc});
     return Items.fromJson(json);
-    
   }
 
- 
   //delete item
   Future<Items> deleteItems({String id}) async {
     await dataService.delete('order/$id');
