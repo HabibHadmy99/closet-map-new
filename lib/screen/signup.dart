@@ -182,7 +182,7 @@ class _SignupScreenState extends State<SignUpScreen> {
               contact: contact,
               address: address,
               password: password,
-              type: type,
+              type: "user",
             );
             Navigator.pushReplacement(context, SigninScreen.route());
           },
